@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const characters = {
-        'Jane Doe': 'images/JaneDoe.jpg',
-        'Nicole Demara': 'images/NicoleDemara.jpg',
-        'Burnice White': 'images/Burnice.jpg',
-        'Caesar King': 'images/Caesar.jpg',
-        'Zhu Yuan': 'images/Zhuyuan.png',
-        'Hoshimi Miyabi': 'images/Miyabi.png',
-        'Tsukishiro Yanagi': 'images/Yanagi.jpg',
-        'Grace Howard': 'images/Grace.jpg',
-        'Ellen Joe': 'images/Ellen.jpg',
-        'Evelyn Chevalier': 'images/Evelyn.png',
-        'Astra Yao': 'images/AstraYao.png',
-        'Belle': 'images/Belle.jpg'
+        'Jane Doe': { image: 'images/JaneDoe.jpg', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
+        'Nicole Demara': { image: 'images/NicoleDemara.jpg', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.png' } },
+        'Burnice White': { image: 'images/Burnice.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Caesar King': { image: 'images/Caesar.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Zhu Yuan': { image: 'images/Zhuyuan.png', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
+        'Hoshimi Miyabi': { image: 'images/Miyabi.png', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
+        'Tsukishiro Yanagi': { image: 'images/Yanagi.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
+        'Grace Howard': { image: 'images/Grace.jpg', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
+        'Ellen Joe': { image: 'images/Ellen.jpg', faction: { name: '«Агентство домашнего персонала "Виктория"»', image: 'images/factions/VictoriaHousekeeping.png' } },
+        'Evelyn Chevalier': { image: 'images/Evelyn.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
+        'Astra Yao': { image: 'images/AstraYao.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
+        'Belle': {image: 'images/Belle.jpg'}
+        // 'Trigger' : {image: 'images/Trigger.'}
     };
 
     const arr = Object.keys(characters);
     const newCharacterButton = document.getElementById('newCharacterButton');
 
     function createCharacterContainer() {
-        // Создаем контейнер и его содержимое
         const container = document.createElement('div');
         container.className = 'container';
 
@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         newButton.id = 'newCharacterButton';
         newButton.textContent = 'Выбрать другую';
 
-        // Собираем структуру
         character.appendChild(imgElement);
         infoWrapper.appendChild(characterName);
         buttonWrapper.appendChild(newButton);
@@ -54,43 +53,58 @@ document.addEventListener('DOMContentLoaded', () => {
         characterWrapper.appendChild(infoWrapper);
         container.appendChild(characterWrapper);
 
-        // Добавляем контейнер в body
         document.body.appendChild(container);
-
-        // Удаляем старую кнопку
         newCharacterButton.remove();
 
-        // Возвращаем созданные элементы для дальнейшего использования
-        return { imgElement, characterName, newButton };
+        return { imgElement, characterName, newButton, infoWrapper };
     }
 
-    function displayRandomCharacter(imgElement, characterName) {
+    function displayRandomCharacter(imgElement, characterName, infoWrapper) {
         const randomItem = arr[Math.floor(Math.random() * arr.length)];
-        const imagePath = characters[randomItem];
+        const characterData = characters[randomItem];
 
-        if (imagePath) {
-            imgElement.src = imagePath;
+        if (characterData) {
+            imgElement.src = characterData.image;
             imgElement.classList.remove('hidden');
             characterName.textContent = randomItem;
             characterName.classList.remove('hidden');
+
+            // Удаляем старую информацию о фракции, если она есть
+            const factionInfo = document.getElementById('faction-info');
+            if (factionInfo) {
+                factionInfo.remove();
+            }
+
+            // Проверяем, есть ли у персонажа фракция
+            if (characterData.faction) {
+                const factionInfo = document.createElement('div');
+                factionInfo.id = 'faction-info';
+
+                const factionImage = document.createElement('img');
+                factionImage.id = 'faction-image';
+                factionImage.src = characterData.faction.image;
+                factionImage.alt = 'Faction Image';
+
+                const factionName = document.createElement('span');
+                factionName.id = 'faction-name';
+                factionName.textContent = characterData.faction.name;
+
+                factionInfo.appendChild(factionImage);
+                factionInfo.appendChild(factionName);
+                infoWrapper.insertBefore(factionInfo, infoWrapper.lastChild);
+            }
         } else {
             console.error('Фотография для персонажа', randomItem, 'не найдена.');
         }
     }
 
     newCharacterButton.addEventListener('click', () => {
-        // Останавливаем анимацию и уменьшаем текст кнопки
         newCharacterButton.classList.add('stop-pulse');
+        const { imgElement, characterName, newButton, infoWrapper } = createCharacterContainer();
+        displayRandomCharacter(imgElement, characterName, infoWrapper);
 
-        // Создаем контейнер и получаем элементы
-        const { imgElement, characterName, newButton } = createCharacterContainer();
-
-        // Показываем первого случайного персонажа
-        displayRandomCharacter(imgElement, characterName);
-
-        // Обработчик для новой кнопки
         newButton.addEventListener('click', () => {
-            displayRandomCharacter(imgElement, characterName);
+            displayRandomCharacter(imgElement, characterName, infoWrapper);
         });
     });
 });

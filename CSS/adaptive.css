@@ -1,36 +1,74 @@
-@media (max-width: 767px) {
+/* Мобильная версия */
+@media (max-width: 768px) {
     body {
-        font-size: 5vw; /* Увеличиваем размер шрифта для мобильных */
+        font-size: 4vw;
+        animation: none;
+        background: #171009;
+    }
+
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        padding: 5vw;
+        max-width: 100%;
+    }
+
+    #character-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #character {
+        margin-right: 0;
+        margin-bottom: 8vw;
     }
 
     #character img {
-        width: 60vw; /* Увеличиваем размер изображения */
-        height: 60vw;
+        width: 50vw;
+        height: 50vw;
     }
 
     #character img:hover {
-        width: 65vw;
-        height: 65vw;
+        width: 50vw;
+        height: 50vw;
+    }
+
+    #info-wrapper {
+        padding-left: 0;
+        align-items: center;
     }
 
     #character-name {
-        font-size: 10vw; /* Увеличиваем размер шрифта имени */
+        font-size: 8vw;
+        text-align: center;
+        margin-bottom: 5vw;
+    }
+
+    #faction-info {
+        flex-direction: column;
+        margin-bottom: 6vw;
     }
 
     #faction-image {
-        width: 7vw; /* Увеличиваем размер изображения фракции */
-        height: 7vw;
+        width: 10vw;
+        height: 10vw;
+        margin-right: 0;
+        margin-bottom: 3vw;
     }
 
     #faction-name {
-        font-size: 4vw; /* Увеличиваем размер шрифта фракции */
+        font-size: 3.5vw;
+        text-align: center;
     }
 
     #newCharacterButton {
-        font-size: 6vw; /* Увеличиваем размер шрифта кнопки */
+        font-size: 5vw;
+        text-align: center;
+        padding-bottom: 1vw;
+        animation: none;
     }
 
     #newCharacterButton.stop-pulse {
-        font-size: 5vw;
+        font-size: 4vw;
     }
 }

@@ -8,11 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
         'Hoshimi Miyabi': { image: 'images/Miyabi.png', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
         'Tsukishiro Yanagi': { image: 'images/Yanagi.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
         'Grace Howard': { image: 'images/Grace.jpg', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
-        'Ellen Joe': { image: 'images/Ellen.jpg', faction: { name: '«Агентство домашнего персонала "Виктория"»', image: 'images/factions/VictoriaHousekeeping.png' } },
+        'Ellen Joe': { image: 'images/Ellen.jpg', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.png' } },
         'Evelyn Chevalier': { image: 'images/Evelyn.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
         'Astra Yao': { image: 'images/AstraYao.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
-        'Belle': {image: 'images/Belle.jpg'}
-        // 'Trigger' : {image: 'images/Trigger.'}
+        'Belle': {image: 'images/Belle.jpg'},
+        'Soldier 0 Anby': {image: 'images/SoldierAnby.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
+        'Pulchra': {image: 'images/Pulchra.png' , faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png '}},
+        'Trigger' : {image: 'images/Trigger.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
+        // 'Vivian'
     };
 
     const arr = Object.keys(characters);

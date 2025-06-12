@@ -13,9 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'Astra Yao': { image: 'images/AstraYao.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
         'Belle': {image: 'images/Belle.jpg'},
         'Soldier 0 Anby': {image: 'images/SoldierAnby.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
-        'Pulchra': {image: 'images/Pulchra.png' , faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png '}},
+        'Pulchra Fellini': {image: 'images/Pulchra.png' , faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png '}},
         'Trigger' : {image: 'images/Trigger.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
-        // 'Vivian'
+        'Vivian Banshee' : {image: 'images/vivian.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.png'}},
+        'Yixuan' : {image: 'images/Yixuan.jpg', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.png'}}
     };
 
     const arr = Object.keys(characters);
@@ -111,3 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+const agentListButton = document.getElementById('agentListButton');
+if (agentListButton) {
+    agentListButton.addEventListener('click', () => {
+        window.location.href = 'agents.html';
+    });
+}

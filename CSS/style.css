@@ -33,22 +33,48 @@ body {
 #character {
     margin-right: 2vw;
     margin-bottom: 2vw;
+    width: 25vw; /* Задаем размеры здесь */
+    height: 25vw;
+    perspective: 1000px; /* Добавляем перспективу для 3D эффекта */
+    cursor: pointer;
 }
 
-#character img {
-    width: 25vw;
-    height: 25vw;
+.character-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+#character.is-flipped .character-card-inner, .character-card-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.character-card-front,
+.character-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
     border-radius: 50%;
-    object-fit: cover;
     box-shadow: 0 0px 2vw rgba(255, 194, 194, 0.752);
     animation: shadowAnimation 5s infinite ease-in-out;
-    transition: 0.5s ease-in-out;
 }
 
-#character img:hover {
-    width: 30vw;
-    height: 30vw;
+.character-card-back {
+    transform: rotateY(180deg);
 }
+
+.character-card-front img,
+.character-card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 
 #info-wrapper {
     padding-left: 3vw;

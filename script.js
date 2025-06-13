@@ -224,3 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+const agentListButton = document.getElementById('agentListButton');
+if (agentListButton) {
+    agentListButton.addEventListener('click', () => {
+        window.location.href = 'agents.html';
+    });
+}

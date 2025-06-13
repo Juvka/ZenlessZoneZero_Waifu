@@ -70,25 +70,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     languageButton.addEventListener('click', translatePage);
 
+    // --- ИЗМЕНЕНИЕ ЗДЕСЬ ---
     // Теперь у каждого персонажа есть 'image' и 'back_image'
     const characters = {
-        'Jane Doe': { image: 'images/JaneDoe.png', back_image: 'images/JaneDoe_back.jpg', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
-        'Nicole Demara': { image: 'images/NicoleDemara.png', back_image: 'images/NicoleDemara_back.jpg', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.png' } },
-        'Burnice White': { image: 'images/BurniceWhite.png', back_image: 'images/Burnice_back.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
-        'Caesar King': { image: 'images/CaesarKing.png', back_image: 'backImages/Caesar.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Jane Doe': { image: 'images/JaneDoe.jpg', back_image: 'images/JaneDoe_back.jpg', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
+        'Nicole Demara': { image: 'images/NicoleDemara.jpg', back_image: 'images/NicoleDemara_back.jpg', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.png' } },
+        'Burnice White': { image: 'images/Burnice.jpg', back_image: 'images/Burnice_back.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Caesar King': { image: 'images/Caesar.jpg', back_image: 'images/Caesar_back.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
         'Zhu Yuan': { image: 'images/Zhuyuan.png', back_image: 'images/Zhuyuan_back.png', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
         'Hoshimi Miyabi': { image: 'images/Miyabi.png', back_image: 'images/Miyabi_back.png', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
-        'Tsukishiro Yanagi': { image: 'images/Yanagi.png', back_image: 'images/Yanagi_back.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
-        'Grace Howard': { image: 'images/GraceHoward.png', back_image: 'images/Grace_back.jpg', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
-        'Ellen Joe': { image: 'images/EllenJoe.png', back_image: 'backImages/Ellen.jpg', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.png' } },
-        'Evelyn Chevalier': { image: 'images/Evelyn.png', back_image: 'backImages/Evelyn.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
-        'Astra Yao': { image: 'images/AstraYao.png', back_image: 'images/backImages/AstraYao.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
-        'Belle': {image: 'images/Belle.png', back_image: 'images/Belle_back.jpg'},
-        'Soldier 0 Anby': {image: 'images/Soldier0Anby.png', back_image: 'backImages/SoldierAnby.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
+        'Tsukishiro Yanagi': { image: 'images/Yanagi.jpg', back_image: 'images/Yanagi_back.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
+        'Grace Howard': { image: 'images/Grace.jpg', back_image: 'images/Grace_back.jpg', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
+        'Ellen Joe': { image: 'images/Ellen.jpg', back_image: 'images/Ellen_back.jpg', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.png' } },
+        'Evelyn Chevalier': { image: 'images/Evelyn.png', back_image: 'images/Evelyn_back.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
+        'Astra Yao': { image: 'images/AstraYao.png', back_image: 'images/AstraYao_back.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
+        'Belle': {image: 'images/Belle.jpg', back_image: 'images/Belle_back.jpg'},
+        'Soldier 0 Anby': {image: 'images/SoldierAnby.jpg', back_image: 'images/SoldierAnby_back.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
         'Pulchra Fellini': {image: 'images/Pulchra.png' , back_image: 'images/Pulchra_back.png', faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png '}},
-        'Trigger' : {image: 'images/Trigger.png', back_image: 'images/backImages/Trigger.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
-        'Vivian Banshee' : {image: 'images/Vivian.png', back_image: 'images/Vivian_back.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.png'}},
-        'Yixuan' : {image: 'images/Yixuan.png', back_image: 'images/Yixuan_back.jpg', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.png'}}
+        'Trigger' : {image: 'images/Trigger.png', back_image: 'images/Trigger_back.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
+        'Vivian Banshee' : {image: 'images/Vivian.jpg', back_image: 'images/Vivian_back.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.png'}},
+        'Yixuan' : {image: 'images/Yixuan.jpg', back_image: 'images/Yixuan_back.jpg', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.png'}}
     };
 
 

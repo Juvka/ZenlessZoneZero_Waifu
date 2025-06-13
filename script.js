@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Soldier 0 Anby': {image: 'images/SoldierAnby.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
         'Pulchra Fellini': {image: 'images/Pulchra.png' , faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png '}},
         'Trigger' : {image: 'images/Trigger.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
-        'Vivian Banshee' : {image: 'images/vivian.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.png'}},
+        'Vivian Banshee' : {image: 'images/Vivian.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.png'}},
         'Yixuan' : {image: 'images/Yixuan.jpg', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.png'}}
     };
 

@@ -44,13 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
         languageButton.textContent = currentLanguage === 'ru' ? 'EN' : 'RU';
         
-        // Обновляем текст кнопок
-        const mainButton = document.getElementById('newCharacterButton');
-        if (mainButton) mainButton.textContent = translations[currentLanguage]['newCharacterButton'];
+        // Обновляем текст ИСХОДНОЙ кнопки "Выбрать агента"
+        const initialButton = document.querySelector('body > #newCharacterButton'); // Select only the initial button
+        if (initialButton) {
+            initialButton.textContent = translations[currentLanguage]['newCharacterButton'];
+        }
         
-        // Обновляем ВСЕ кнопки "Выбрать другую"
-        const anotherButtons = document.querySelectorAll('#newCharacterButton');
-        anotherButtons.forEach(btn => {
+        // Обновляем текст ВСЕХ динамически созданных кнопок "Выбрать другую"
+        const dynamicButtons = document.querySelectorAll('.container #newCharacterButton');
+        dynamicButtons.forEach(btn => {
             btn.textContent = translations[currentLanguage]['chooseAnother'];
         });
         
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 
     // Обработчик кнопки перевода
     languageButton.addEventListener('click', translatePage);
@@ -168,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             : (translations['ru']['factions'][characterData.faction.name] || characterData.faction.name);
 
         factionInfo.appendChild(factionImage);
-        factionInfo.appendChild(factionName);
+        factionInfo.appendChild(factionName);   
         infoWrapper.insertBefore(factionInfo, infoWrapper.lastChild);
         } else {
             const factionInfo = document.createElement('div');

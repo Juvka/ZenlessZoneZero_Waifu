@@ -116,7 +116,7 @@
     }
 
     /* Кнопки в шапке */
-    #languageButton, #TelegramButton {
+   #languageButton, #TelegramButton {
         font-size: 0.9rem;
         padding: 8px 15px;
         top: 10px;
@@ -126,18 +126,22 @@
 
     #languageButton {
         left: 10px;
+        padding: 8px 15px;
     }
 
     #TelegramButton {
-        left: calc(10px + 60px);
+        left: calc(10px + 55px); /* Уменьшено расстояние от 60px до 55px */
         width: 35px;
         height: 35px;
         padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .icon-small {
-        width: 22px;
-        height: 22px;
+        width: 20px; /* Немного уменьшен размер иконки */
+        height: 20px;
     }
 
     /* Анимации для мобильных */

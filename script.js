@@ -38,25 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentLanguage = 'ru';
     const languageButton = document.getElementById('languageButton');
-    
-    // Функция перевода
+
     function translatePage() {
         currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
         languageButton.textContent = currentLanguage === 'ru' ? 'EN' : 'RU';
-        
-        // Обновляем текст ИСХОДНОЙ кнопки "Выбрать агента"
-        const initialButton = document.querySelector('body > #newCharacterButton'); // Select only the initial button
+
+        const initialButton = document.querySelector('body > #newCharacterButton');
         if (initialButton) {
             initialButton.textContent = translations[currentLanguage]['newCharacterButton'];
         }
-        
-        // Обновляем текст ВСЕХ динамически созданных кнопок "Выбрать другую"
+
         const dynamicButtons = document.querySelectorAll('.container #newCharacterButton');
         dynamicButtons.forEach(btn => {
             btn.textContent = translations[currentLanguage]['chooseAnother'];
         });
-        
-        // Обновляем текст фракций
+
         const factionNames = document.querySelectorAll('#faction-name');
         factionNames.forEach(el => {
             const originalName = el.dataset.originalName;
@@ -72,29 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // Обработчик кнопки перевода
     languageButton.addEventListener('click', translatePage);
 
+    // Теперь у каждого персонажа есть 'image' и 'back_image'
     const characters = {
-        'Jane Doe': { image: 'images/JaneDoe.jpg', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
-        'Nicole Demara': { image: 'images/NicoleDemara.jpg', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.png' } },
-        'Burnice White': { image: 'images/Burnice.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
-        'Caesar King': { image: 'images/Caesar.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
-        'Zhu Yuan': { image: 'images/Zhuyuan.png', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
-        'Hoshimi Miyabi': { image: 'images/Miyabi.png', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
-        'Tsukishiro Yanagi': { image: 'images/Yanagi.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
-        'Grace Howard': { image: 'images/Grace.jpg', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
-        'Ellen Joe': { image: 'images/Ellen.jpg', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.png' } },
-        'Evelyn Chevalier': { image: 'images/Evelyn.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
-        'Astra Yao': { image: 'images/AstraYao.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
-        'Belle': {image: 'images/Belle.jpg'},
-        'Soldier 0 Anby': {image: 'images/SoldierAnby.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
-        'Pulchra Fellini': {image: 'images/Pulchra.png' , faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png '}},
-        'Trigger' : {image: 'images/Trigger.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
-        'Vivian Banshee' : {image: 'images/Vivian.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.png'}},
-        'Yixuan' : {image: 'images/Yixuan.jpg', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.png'}}
+        'Jane Doe': { image: 'images/JaneDoe.png', back_image: 'images/JaneDoe_back.jpg', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
+        'Nicole Demara': { image: 'images/NicoleDemara.png', back_image: 'images/NicoleDemara_back.jpg', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.png' } },
+        'Burnice White': { image: 'images/BurniceWhite.png', back_image: 'images/Burnice_back.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Caesar King': { image: 'images/CaesarKing.png', back_image: 'backImages/Caesar.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Zhu Yuan': { image: 'images/Zhuyuan.png', back_image: 'images/Zhuyuan_back.png', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
+        'Hoshimi Miyabi': { image: 'images/Miyabi.png', back_image: 'images/Miyabi_back.png', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
+        'Tsukishiro Yanagi': { image: 'images/Yanagi.png', back_image: 'images/Yanagi_back.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.png' } },
+        'Grace Howard': { image: 'images/GraceHoward.png', back_image: 'images/Grace_back.jpg', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
+        'Ellen Joe': { image: 'images/EllenJoe.png', back_image: 'backImages/Ellen.jpg', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.png' } },
+        'Evelyn Chevalier': { image: 'images/Evelyn.png', back_image: 'backImages/Evelyn.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
+        'Astra Yao': { image: 'images/AstraYao.png', back_image: 'images/backImages/AstraYao.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.png' } },
+        'Belle': {image: 'images/Belle.png', back_image: 'images/Belle_back.jpg'},
+        'Soldier 0 Anby': {image: 'images/Soldier0Anby.png', back_image: 'backImages/SoldierAnby.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
+        'Pulchra Fellini': {image: 'images/Pulchra.png' , back_image: 'images/Pulchra_back.png', faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png '}},
+        'Trigger' : {image: 'images/Trigger.png', back_image: 'images/backImages/Trigger.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.png'}},
+        'Vivian Banshee' : {image: 'images/Vivian.png', back_image: 'images/Vivian_back.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.png'}},
+        'Yixuan' : {image: 'images/Yixuan.png', back_image: 'images/Yixuan_back.jpg', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.png'}}
     };
+
 
     const arr = Object.keys(characters);
     const newCharacterButton = document.getElementById('newCharacterButton');
@@ -106,102 +102,124 @@ document.addEventListener('DOMContentLoaded', () => {
         const characterWrapper = document.createElement('div');
         characterWrapper.id = 'character-wrapper';
 
-        const character = document.createElement('div');
-        character.id = 'character';
+        const characterDiv = document.createElement('div');
+        characterDiv.id = 'character';
 
-        const imgElement = document.createElement('img');
-        imgElement.src = '';
-        imgElement.alt = 'Character Image';
-        imgElement.className = 'hidden';
+        const cardInner = document.createElement('div');
+        cardInner.className = 'character-card-inner';
+
+        const cardFront = document.createElement('div');
+        cardFront.className = 'character-card-front';
+        const imgElementFront = document.createElement('img');
+        imgElementFront.alt = 'Character Image Front';
+        cardFront.appendChild(imgElementFront);
+
+        const cardBack = document.createElement('div');
+        cardBack.className = 'character-card-back';
+        const imgElementBack = document.createElement('img');
+        imgElementBack.alt = 'Character Image Back';
+        cardBack.appendChild(imgElementBack);
+
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        characterDiv.appendChild(cardInner);
 
         const infoWrapper = document.createElement('div');
         infoWrapper.id = 'info-wrapper';
 
         const characterName = document.createElement('div');
         characterName.id = 'character-name';
-        characterName.className = 'hidden';
 
         const buttonWrapper = document.createElement('span');
         const newButton = document.createElement('button');
         newButton.id = 'newCharacterButton';
-        // Устанавливаем текст кнопки в зависимости от текущего языка
         newButton.textContent = translations[currentLanguage]['chooseAnother'];
 
-        character.appendChild(imgElement);
         infoWrapper.appendChild(characterName);
         buttonWrapper.appendChild(newButton);
         infoWrapper.appendChild(buttonWrapper);
-        characterWrapper.appendChild(character);
+        characterWrapper.appendChild(characterDiv);
         characterWrapper.appendChild(infoWrapper);
         container.appendChild(characterWrapper);
 
         document.body.appendChild(container);
         newCharacterButton.remove();
 
-        return { imgElement, characterName, newButton, infoWrapper };
+        cardInner.addEventListener('click', () => {
+            cardInner.classList.toggle('is-flipped');
+        });
+
+        return { imgElementFront, imgElementBack, characterName, newButton, infoWrapper, cardInner };
     }
 
-    function displayRandomCharacter(imgElement, characterName, infoWrapper) {
-    const randomItem = arr[Math.floor(Math.random() * arr.length)];
-    const characterData = characters[randomItem];
+    // --- ИЗМЕНЕНИЕ ЗДЕСЬ ---
+    // Функция теперь выбирает ОДНОГО персонажа и использует оба его изображения
+    function displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper) {
+        // Выбираем одного случайного персонажа
+        const randomItem = arr[Math.floor(Math.random() * arr.length)];
+        const characterData = characters[randomItem];
 
-    if (characterData) {
-        imgElement.src = characterData.image;
-        imgElement.classList.remove('hidden');
-        characterName.textContent = randomItem;
-        characterName.classList.remove('hidden');
-
-        const factionInfo = document.getElementById('faction-info');
-        if (factionInfo) factionInfo.remove();
-
-        if (characterData.faction) {
-        const factionInfo = document.createElement('div');
-        factionInfo.id = 'faction-info';
-
-        const factionImage = document.createElement('img');
-        factionImage.id = 'faction-image';
-        factionImage.src = characterData.faction.image;
-        factionImage.alt = 'Faction Image';
-
-        const factionName = document.createElement('span');
-        factionName.id = 'faction-name';
-        factionName.dataset.originalName = characterData.faction.name; // Сохраняем оригинальное название
-        factionName.textContent = currentLanguage === 'ru' 
-            ? characterData.faction.name 
-            : (translations['ru']['factions'][characterData.faction.name] || characterData.faction.name);
-
-        factionInfo.appendChild(factionImage);
-        factionInfo.appendChild(factionName);   
-        infoWrapper.insertBefore(factionInfo, infoWrapper.lastChild);
-        } else {
-            const factionInfo = document.createElement('div');
-            factionInfo.id = 'faction-info';
+        if (characterData) {
+            // Устанавливаем лицевое и оборотное изображение
+            imgElementFront.src = characterData.image;
+            imgElementBack.src = characterData.back_image;
             
-            const factionName = document.createElement('span');
-            factionName.id = 'faction-name';
-            factionName.textContent = translations[currentLanguage]['noFaction'];
-            
-            factionInfo.appendChild(factionName);
-            infoWrapper.insertBefore(factionInfo, infoWrapper.lastChild);
+            characterName.textContent = randomItem;
+
+            const factionInfo = document.getElementById('faction-info');
+            if (factionInfo) factionInfo.remove();
+
+            if (characterData.faction) {
+                const newFactionInfo = document.createElement('div');
+                newFactionInfo.id = 'faction-info';
+
+                const factionImage = document.createElement('img');
+                factionImage.id = 'faction-image';
+                factionImage.src = characterData.faction.image;
+                factionImage.alt = 'Faction Image';
+
+                const factionName = document.createElement('span');
+                factionName.id = 'faction-name';
+                factionName.dataset.originalName = characterData.faction.name;
+                factionName.textContent = currentLanguage === 'ru' 
+                    ? characterData.faction.name 
+                    : (translations['ru']['factions'][characterData.faction.name] || characterData.faction.name);
+
+                newFactionInfo.appendChild(factionImage);
+                newFactionInfo.appendChild(factionName);   
+                infoWrapper.insertBefore(newFactionInfo, infoWrapper.lastChild);
+            } else {
+                const newFactionInfo = document.createElement('div');
+                newFactionInfo.id = 'faction-info';
+                
+                const factionName = document.createElement('span');
+                factionName.id = 'faction-name';
+                factionName.textContent = translations[currentLanguage]['noFaction'];
+                
+                newFactionInfo.appendChild(factionName);
+                infoWrapper.insertBefore(newFactionInfo, infoWrapper.lastChild);
+            }
         }
     }
-}
 
     newCharacterButton.addEventListener('click', () => {
         newCharacterButton.classList.add('stop-pulse');
-        const { imgElement, characterName, newButton, infoWrapper } = createCharacterContainer();
-        displayRandomCharacter(imgElement, characterName, infoWrapper);
+        const { imgElementFront, imgElementBack, characterName, newButton, infoWrapper, cardInner } = createCharacterContainer();
+        displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper);
 
         newButton.addEventListener('click', () => {
             newButton.textContent = translations[currentLanguage]['chooseAnother'];
-            displayRandomCharacter(imgElement, characterName, infoWrapper);
+
+            const displayNew = () => {
+                displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper);
+            }
+
+            if (cardInner.classList.contains('is-flipped')) {
+                cardInner.classList.remove('is-flipped');
+                setTimeout(displayNew, 600);
+            } else {
+                displayNew();
+            }
         });
     });
 });
-
-const agentListButton = document.getElementById('agentListButton');
-if (agentListButton) {
-    agentListButton.addEventListener('click', () => {
-        window.location.href = 'agents.html';
-    });
-}

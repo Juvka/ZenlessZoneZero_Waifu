@@ -38,25 +38,21 @@
     /* Изображение персонажа */
     #character {
         margin: 0 0 30px 0;
-        width: 100%;
+        width: 70vw; /* Размеры здесь */
+        height: 70vw;
+        max-width: 300px;
+        max-height: 300px;
         display: flex;
         justify-content: center;
     }
 
-    #character img {
-        width: 70vw;
-        height: 70vw;
-        max-width: 300px;
-        max-height: 300px;
+    #character img { /* Убрали размеры отсюда */
         transition: transform 0.3s ease;
     }
 
+    /* Убираем ховер эффект для мобильных */
     #character img:hover {
-        transform: scale(1.05);
-        width: 70vw;
-        height: 70vw;
-        max-width: 300px;
-        max-height: 300px;
+        transform: none;
     }
 
     /* Информация о персонаже */
@@ -97,7 +93,7 @@
 
     /* Кнопки */
     #newCharacterButton {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         padding: 10px 20px;
         margin-top: 20px;
         text-align: center;
@@ -116,7 +112,7 @@
     }
 
     /* Кнопки в шапке */
-   #languageButton, #TelegramButton {
+    #languageButton, #TelegramButton {
         font-size: 0.9rem;
         padding: 8px 15px;
         top: 10px;
@@ -140,14 +136,15 @@
     }
 
     .icon-small {
-        width: 22px; /* Немного уменьшен размер иконки */
-        height: 22px;
+        width: 20px; /* Немного уменьшен размер иконки */
+        height: 20px;
     }
 
     /* Анимации для мобильных */
     @media (prefers-reduced-motion: no-preference) {
         #character img {
-            animation: shadowAnimation 5s infinite ease-in-out;
+            /* анимация тени теперь на .character-card-front/back */
+            animation: none; 
         }
         
         #newCharacterButton:hover {
@@ -192,10 +189,7 @@
     #character {
         margin-right: 30px;
         margin-bottom: 0;
-    }
-    
-    #character img {
-        width: 35vw;
+        width: 35vw; /* Размеры здесь */
         height: 35vw;
         max-width: 250px;
         max-height: 250px;
@@ -233,13 +227,10 @@
     
     #character {
         margin: 0 20px 0 0;
-    }
-    
-    #character img {
-        width: 40vh;
+        width: 40vh; /* Размеры здесь */
         height: 40vh;
     }
-    
+        
     #info-wrapper {
         align-items: flex-start;
         text-align: left;

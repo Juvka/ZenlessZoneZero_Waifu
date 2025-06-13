@@ -1,4 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const translations = {
+        'ru': {
+            'newCharacterButton': 'Выбрать агента',
+            'chooseAnother': 'Выбрать другую',
+            'noFaction': 'Нет фракции',
+            'factions': {
+                '«Группа особого реагирования угрозыска»': '«Threat Investigation Special Response Team»',
+                '«Хитрые зайцы»': '«Gentle House»',
+                '«Сыны Калидона»': '«Sons of Calydon»',
+                '«Секция 6»': '«Section 6»',
+                '«Белобог»': '«Belobog»',
+                '«Агентство домашнего персонала Виктория»': '«Victoria Housekeeping Agency»',
+                '«Созвездие Лиры»': '«Constellation of Lyra»',
+                '«Отряд Обол»': '«Obol Squad»',
+                '«Пересмешники»': '«Mockingbirds»',
+                '«Школа горы Юнькуй»': '«Yunkui Summit School»'
+            }
+        },
+        'en': {
+            'newCharacterButton': 'Choose agent',
+            'chooseAnother': 'Choose another',
+            'noFaction': 'No faction',
+            'factions': {
+                '«Threat Investigation Special Response Team»': '«Группа особого реагирования угрозыска»',
+                '«Gentle House»': '«Хитрые зайцы»',
+                '«Sons of Calydon»': '«Сыны Калидона»',
+                '«Section 6»': '«Секция 6»',
+                '«Belobog»': '«Белобог»',
+                '«Victoria Housekeeping Agency»': '«Агентство домашнего персонала Виктория»',
+                '«Constellation of Lyra»': '«Созвездие Лиры»',
+                '«Obol Squad»': '«Отряд Обол»',
+                '«Mockingbirds»': '«Пересмешники»',
+                '«Yunkui Summit School»': '«Школа горы Юнькуй»'
+            }
+        }
+    };
+
+    let currentLanguage = 'ru';
+    const languageButton = document.getElementById('languageButton');
+    
+    // Функция перевода
+    function translatePage() {
+        currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+        languageButton.textContent = currentLanguage === 'ru' ? 'EN' : 'RU';
+        
+        // Обновляем текст кнопок
+        const mainButton = document.getElementById('newCharacterButton');
+        if (mainButton) mainButton.textContent = translations[currentLanguage]['newCharacterButton'];
+        
+        // Обновляем ВСЕ кнопки "Выбрать другую"
+        const anotherButtons = document.querySelectorAll('#newCharacterButton');
+        anotherButtons.forEach(btn => {
+            btn.textContent = translations[currentLanguage]['chooseAnother'];
+        });
+        
+        // Обновляем текст фракций
+        const factionNames = document.querySelectorAll('#faction-name');
+        factionNames.forEach(el => {
+            const originalName = el.dataset.originalName;
+            if (originalName) {
+                if (currentLanguage === 'en') {
+                    el.textContent = translations['ru']['factions'][originalName] || originalName;
+                } else {
+                    el.textContent = originalName;
+                }
+            } else if (el.textContent === 'Нет фракции' || el.textContent === 'No faction') {
+                el.textContent = translations[currentLanguage]['noFaction'];
+            }
+        });
+    }
+
+    // Обработчик кнопки перевода
+    languageButton.addEventListener('click', translatePage);
+
     const characters = {
         'Jane Doe': { image: 'images/JaneDoe.jpg', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.png' } },
         'Nicole Demara': { image: 'images/NicoleDemara.jpg', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.png' } },
@@ -47,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const buttonWrapper = document.createElement('span');
         const newButton = document.createElement('button');
         newButton.id = 'newCharacterButton';
-        newButton.textContent = 'Выбрать другую';
+        // Устанавливаем текст кнопки в зависимости от текущего языка
+        newButton.textContent = translations[currentLanguage]['chooseAnother'];
 
         character.appendChild(imgElement);
         infoWrapper.appendChild(characterName);
@@ -64,43 +139,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayRandomCharacter(imgElement, characterName, infoWrapper) {
-        const randomItem = arr[Math.floor(Math.random() * arr.length)];
-        const characterData = characters[randomItem];
+    const randomItem = arr[Math.floor(Math.random() * arr.length)];
+    const characterData = characters[randomItem];
 
-        if (characterData) {
-            imgElement.src = characterData.image;
-            imgElement.classList.remove('hidden');
-            characterName.textContent = randomItem;
-            characterName.classList.remove('hidden');
+    if (characterData) {
+        imgElement.src = characterData.image;
+        imgElement.classList.remove('hidden');
+        characterName.textContent = randomItem;
+        characterName.classList.remove('hidden');
 
-            // Удаляем старую информацию о фракции, если она есть
-            const factionInfo = document.getElementById('faction-info');
-            if (factionInfo) {
-                factionInfo.remove();
-            }
+        const factionInfo = document.getElementById('faction-info');
+        if (factionInfo) factionInfo.remove();
 
-            // Проверяем, есть ли у персонажа фракция
-            if (characterData.faction) {
-                const factionInfo = document.createElement('div');
-                factionInfo.id = 'faction-info';
+        if (characterData.faction) {
+        const factionInfo = document.createElement('div');
+        factionInfo.id = 'faction-info';
 
-                const factionImage = document.createElement('img');
-                factionImage.id = 'faction-image';
-                factionImage.src = characterData.faction.image;
-                factionImage.alt = 'Faction Image';
+        const factionImage = document.createElement('img');
+        factionImage.id = 'faction-image';
+        factionImage.src = characterData.faction.image;
+        factionImage.alt = 'Faction Image';
 
-                const factionName = document.createElement('span');
-                factionName.id = 'faction-name';
-                factionName.textContent = characterData.faction.name;
+        const factionName = document.createElement('span');
+        factionName.id = 'faction-name';
+        factionName.dataset.originalName = characterData.faction.name; // Сохраняем оригинальное название
+        factionName.textContent = currentLanguage === 'ru' 
+            ? characterData.faction.name 
+            : (translations['ru']['factions'][characterData.faction.name] || characterData.faction.name);
 
-                factionInfo.appendChild(factionImage);
-                factionInfo.appendChild(factionName);
-                infoWrapper.insertBefore(factionInfo, infoWrapper.lastChild);
-            }
+        factionInfo.appendChild(factionImage);
+        factionInfo.appendChild(factionName);
+        infoWrapper.insertBefore(factionInfo, infoWrapper.lastChild);
         } else {
-            console.error('Фотография для персонажа', randomItem, 'не найдена.');
+            const factionInfo = document.createElement('div');
+            factionInfo.id = 'faction-info';
+            
+            const factionName = document.createElement('span');
+            factionName.id = 'faction-name';
+            factionName.textContent = translations[currentLanguage]['noFaction'];
+            
+            factionInfo.appendChild(factionName);
+            infoWrapper.insertBefore(factionInfo, infoWrapper.lastChild);
         }
     }
+}
 
     newCharacterButton.addEventListener('click', () => {
         newCharacterButton.classList.add('stop-pulse');
@@ -108,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayRandomCharacter(imgElement, characterName, infoWrapper);
 
         newButton.addEventListener('click', () => {
+            newButton.textContent = translations[currentLanguage]['chooseAnother'];
             displayRandomCharacter(imgElement, characterName, infoWrapper);
         });
     });

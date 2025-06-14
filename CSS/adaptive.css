@@ -44,13 +44,13 @@
         max-height: 300px;
         display: flex;
         justify-content: center;
-
-        -webkit-touch-callout: none; 
-        -webkit-user-select: none;   
-        -moz-user-select: none;      
-        -ms-user-select: none;       
-        user-select: none;           
-        -webkit-user-drag: none;   
+        /* --- ИСПРАВЛЕНИЕ ЗДЕСЬ --- */
+        -webkit-touch-callout: none; /* Запрет вызова меню в iOS Safari */
+        -webkit-user-select: none;   /* Safari, Chrome, Opera */
+        -moz-user-select: none;      /* Firefox */
+        -ms-user-select: none;       /* Internet Explorer/Edge */
+        user-select: none;           /* Стандартное свойство */
+        -webkit-user-drag: none;     /* Запрет перетаскивания в WebKit */
     }
 
     #character img { /* Убрали размеры отсюда */
@@ -200,6 +200,13 @@
         height: 35vw;
         max-width: 250px;
         max-height: 250px;
+        /* --- ИСПРАВЛЕНИЕ ЗДЕСЬ --- */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
     }
     
     #character-name {
@@ -236,6 +243,13 @@
         margin: 0 20px 0 0;
         width: 40vh; /* Размеры здесь */
         height: 40vh;
+        /* --- ИСПРАВЛЕНИЕ ЗДЕСЬ --- */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
     }
         
     #info-wrapper {

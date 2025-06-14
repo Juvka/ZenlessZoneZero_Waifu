@@ -41,12 +41,17 @@
         display: flex;
         justify-content: center;
         /* --- Стили для отключения выделения --- */
+        -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
         -webkit-user-drag: none;
+    }
+
+    .character-card-inner {
+        -webkit-tap-highlight-color: transparent;
     }
     
     #info-wrapper {

@@ -71,23 +71,23 @@ document.addEventListener('DOMContentLoaded', () => {
     languageButton.addEventListener('click', translatePage);
 
     const characters = {
-        'Jane Doe': { image: 'images/JaneDoe.webp', back_image: 'images/backImages/JaneDoe.jpg', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
-        'Nicole Demara': { image: 'images/NicoleDemara.webp', back_image: 'images/backImages/NicoleDemara.jpg', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.webp' } },
-        'Burnice White': { image: 'images/BurniceWhite.webp', back_image: 'images/backImages/BurniceWhite.jpg', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp' } },
-        'Caesar King': { image: 'images/CaesarKing.webp', back_image: 'images/backImages/CaesarKing.png', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
-        'Zhu Yuan': { image: 'images/Zhuyuan.webp', back_image: 'images/backImages/Zhuyuan.png', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
-        'Hoshimi Miyabi': { image: 'images/Miyabi.webp', back_image: 'images/backImages/Miyabi.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },
-        'Tsukishiro Yanagi': { image: 'images/Yanagi.webp', back_image: 'images/backImages/Yanagi.jpg', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },
-        'Grace Howard': { image: 'images/GraceHoward.webp', back_image: 'images/backImages/GraceHoward.jpg', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
-        'Ellen Joe': { image: 'images/EllenJoe.webp', back_image: 'images/backImages/EllenJoe.jpg', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.webp' } },
-        'Evelyn Chevalier': { image: 'images/Evelyn.webp', back_image: 'images/backImages/Evelyn.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' } },
-        'Astra Yao': { image: 'images/AstraYao.webp', back_image: 'images/backImages/AstraYao.png', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' } },
-        'Belle': {image: 'images/Belle.webp', back_image: 'images/backImages/Belle.png'},
-        'Soldier 0 Anby': {image: 'images/Soldier0Anby.webp', back_image: 'images/backImages/Soldier0Anby.jpg', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.webp'}},
-        'Pulchra Fellini': {image: 'images/Pulchra.webp' , back_image: 'images/backImages/Pulchra.jpg', faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp '}},
-        'Trigger' : {image: 'images/Trigger.webp', back_image: 'images/backImages/Trigger.png', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.webp'}},
-        'Vivian Banshee' : {image: 'images/Vivian.webp', back_image: 'images/backImages/Vivian.jpg', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.webp'}},
-        'Yixuan' : {image: 'images/Yixuan.webp', back_image: 'images/backImages/Yixuan.png', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.webp'}}
+        'Jane Doe': { image: 'images/JaneDoe.webp', back_image: 'images/backImages/JaneDoe.webp', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
+        'Nicole Demara': { image: 'images/NicoleDemara.webp', back_image: 'images/backImages/NicoleDemara.webp', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.webp' } },
+        'Burnice White': { image: 'images/BurniceWhite.webp', back_image: 'images/backImages/BurniceWhite.webp', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp' } },
+        'Caesar King': { image: 'images/CaesarKing.webp', back_image: 'images/backImages/CaesarKing.webp', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Zhu Yuan': { image: 'images/Zhuyuan.webp', back_image: 'images/backImages/Zhuyuan.webp', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
+        'Hoshimi Miyabi': { image: 'images/Miyabi.webp', back_image: 'images/backImages/Miyabi.webp', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },
+        'Tsukishiro Yanagi': { image: 'images/Yanagi.webp', back_image: 'images/backImages/Yanagi.webp', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },
+        'Grace Howard': { image: 'images/GraceHoward.webp', back_image: 'images/backImages/GraceHoward.webp', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
+        'Ellen Joe': { image: 'images/EllenJoe.webp', back_image: 'images/backImages/EllenJoe.webp', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.webp' } },
+        'Evelyn Chevalier': { image: 'images/Evelyn.webp', back_image: 'images/backImages/Evelyn.webp', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' } },
+        'Astra Yao': { image: 'images/AstraYao.webp', back_image: 'images/backImages/AstraYao.webp', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' } },
+        'Belle': {image: 'images/Belle.webp', back_image: 'images/backImages/Belle.webp'},
+        'Soldier 0 Anby': {image: 'images/Soldier0Anby.webp', back_image: 'images/backImages/Soldier0Anby.webp', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.webp'}},
+        'Pulchra Fellini': {image: 'images/Pulchra.webp' , back_image: 'images/backImages/Pulchra.webp', faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp '}},
+        'Trigger' : {image: 'images/Trigger.webp', back_image: 'images/backImages/Trigger.webp', faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.webp'}},
+        'Vivian Banshee' : {image: 'images/Vivian.webp', back_image: 'images/backImages/Vivian.webp', faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.webp'}},
+        'Yixuan' : {image: 'images/Yixuan.webp', back_image: 'images/backImages/Yixuan.webp', faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.webp'}}
         // Fufu
     };
 

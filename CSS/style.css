@@ -55,6 +55,7 @@ body {
 
 #character.is-flipped .character-card-inner, .character-card-inner.is-flipped {
     transform: rotateY(180deg);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .character-card-front,
@@ -79,7 +80,13 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    pointer-events: none;
+    pointer-events: none; /* Запрещаем события на самом изображении */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 

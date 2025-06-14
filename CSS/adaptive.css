@@ -1,6 +1,5 @@
 /* Мобильная версия (до 768px) */
 @media (max-width: 768px) {
-    /* Основные стили */
     body {
         font-size: 16px;
         animation: none;
@@ -14,7 +13,6 @@
         align-items: center;
     }
 
-    /* Контейнер */
     .container {
         width: 100%;
         max-width: 100%;
@@ -26,7 +24,6 @@
         margin: 0;
     }
 
-    /* Обертка персонажа */
     #character-wrapper {
         flex-direction: column;
         align-items: center;
@@ -35,34 +32,23 @@
         gap: 30px;
     }
 
-    /* Изображение персонажа */
     #character {
         margin: 0 0 30px 0;
-        width: 70vw; /* Размеры здесь */
+        width: 70vw;
         height: 70vw;
         max-width: 300px;
         max-height: 300px;
         display: flex;
         justify-content: center;
-        /* --- ИСПРАВЛЕНИЕ ЗДЕСЬ --- */
-        -webkit-touch-callout: none; /* Запрет вызова меню в iOS Safari */
-        -webkit-user-select: none;   /* Safari, Chrome, Opera */
-        -moz-user-select: none;      /* Firefox */
-        -ms-user-select: none;       /* Internet Explorer/Edge */
-        user-select: none;           /* Стандартное свойство */
-        -webkit-user-drag: none;     /* Запрет перетаскивания в WebKit */
+        /* --- Стили для отключения выделения --- */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
     }
-
-    #character img { /* Убрали размеры отсюда */
-        transition: transform 0.3s ease;
-    }
-
-    /* Убираем ховер эффект для мобильных */
-    #character img:hover {
-        transform: none;
-    }
-
-    /* Информация о персонаже */
+    
     #info-wrapper {
         padding: 0;
         width: 100%;
@@ -78,7 +64,6 @@
         word-wrap: break-word;
     }
 
-    /* Информация о фракции */
     #faction-info {
         flex-direction: column;
         align-items: center;
@@ -98,7 +83,6 @@
         line-height: 1.4;
     }
 
-    /* Кнопки */
     #newCharacterButton {
         font-size: 1.3rem;
         padding: 10px 20px;
@@ -118,7 +102,6 @@
         display: none;
     }
 
-    /* Кнопки в шапке */
     #languageButton, #TelegramButton {
         font-size: 0.9rem;
         padding: 8px 15px;
@@ -129,106 +112,28 @@
 
     #languageButton {
         left: 10px;
-        padding: 8px 15px;
     }
 
     #TelegramButton {
-        left: calc(10px + 55px); /* Уменьшено расстояние от 60px до 55px */
+        left: calc(10px + 60px);
         width: 35px;
         height: 35px;
         padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .icon-small {
-        width: 20px; /* Немного уменьшен размер иконки */
+        width: 20px;
         height: 20px;
-    }
-
-    /* Анимации для мобильных */
-    @media (prefers-reduced-motion: no-preference) {
-        #character img {
-            /* анимация тени теперь на .character-card-front/back */
-            animation: none; 
-        }
-        
-        #newCharacterButton:hover {
-            transform: scale(1.05);
-        }
-    }
-
-    /* Для очень маленьких экранов */
-    @media (max-width: 400px) {
-        #character-name {
-            font-size: 1.8rem;
-        }
-        
-        #newCharacterButton {
-            font-size: 1.4rem;
-            padding: 8px 16px;
-        }
-        
-        #faction-image {
-            width: 40px;
-            height: 40px;
-        }
     }
 }
 
 /* Планшетная версия (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
-    body {
-        font-size: 18px;
-    }
-    
-    .container {
-        padding: 30px;
-        max-width: 90%;
-    }
-    
-    #character-wrapper {
-        flex-direction: row;
-        align-items: center;
-    }
-    
     #character {
-        margin-right: 30px;
-        margin-bottom: 0;
-        width: 35vw; /* Размеры здесь */
+        width: 35vw;
         height: 35vw;
         max-width: 250px;
         max-height: 250px;
-        /* --- ИСПРАВЛЕНИЕ ЗДЕСЬ --- */
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-user-drag: none;
-    }
-    
-    #character-name {
-        font-size: 3rem;
-    }
-    
-    #faction-info {
-        flex-direction: row;
-    }
-    
-    #faction-image {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-    }
-    
-    #newCharacterButton {
-        font-size: 1.3rem;
-    }
-    
-    #languageButton, #TelegramButton {
-        font-size: 1rem;
     }
 }
 
@@ -241,15 +146,8 @@
     
     #character {
         margin: 0 20px 0 0;
-        width: 40vh; /* Размеры здесь */
+        width: 40vh;
         height: 40vh;
-        /* --- ИСПРАВЛЕНИЕ ЗДЕСЬ --- */
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-user-drag: none;
     }
         
     #info-wrapper {
@@ -257,7 +155,7 @@
         text-align: left;
     }
     
-    #character-name {
+    #character-name, #faction-name {
         text-align: left;
     }
     
@@ -269,9 +167,5 @@
     #faction-image {
         margin-right: 10px;
         margin-bottom: 0;
-    }
-    
-    #faction-name {
-        text-align: left;
     }
 }

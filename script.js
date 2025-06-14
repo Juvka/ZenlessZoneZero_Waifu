@@ -104,6 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const characterDiv = document.createElement('div');
         characterDiv.id = 'character';
 
+        characterDiv.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        });
+
         const cardInner = document.createElement('div');
         cardInner.className = 'character-card-inner';
 

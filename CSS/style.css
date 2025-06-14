@@ -37,13 +37,12 @@ body {
     height: 25vw;
     perspective: 1000px; /* Добавляем перспективу для 3D эффекта */
     cursor: pointer;
-
     -webkit-touch-callout: none; 
     -webkit-user-select: none;   
     -moz-user-select: none;      
     -ms-user-select: none;       
     user-select: none;           
-    -webkit-user-drag: none;   
+    -webkit-user-drag: none;    
 }
 
 .character-card-inner {
@@ -63,7 +62,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 50%;
     box-shadow: 0 0px 2vw rgba(255, 194, 194, 0.752);
@@ -80,6 +79,8 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+    /* --- НОВОЕ ИЗМЕНЕНИЕ ЗДЕСЬ --- */
+    pointer-events: none; /* Запрещаем события на самом изображении */
 }
 
 
@@ -165,7 +166,6 @@ body {
     font-size: 1.5vw;
 }
 
-/* Кнопка перевода и Telegram */
 #languageButton, #TelegramButton {
     position: fixed;
     top: 20px;

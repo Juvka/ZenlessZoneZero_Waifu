@@ -37,6 +37,13 @@ body {
     height: 25vw;
     perspective: 1000px; /* Добавляем перспективу для 3D эффекта */
     cursor: pointer;
+
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;   
+    -moz-user-select: none;      
+    -ms-user-select: none;       
+    user-select: none;           
+    -webkit-user-drag: none;   
 }
 
 .character-card-inner {

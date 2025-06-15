@@ -105,28 +105,23 @@
         display: none;
     }
 
-    #languageButton, #TelegramButton {
-        font-size: 0.9rem;
-        padding: 8px 15px;
+    /* Адаптивные стили для контейнера кнопок */
+    #top-left-controls {
         top: 10px;
-        position: fixed;
-        z-index: 1000;
+        left: 10px;
+        gap: 8px;
     }
 
-    #languageButton {
-        left: 10px;
+    /* Адаптивные стили для самих кнопок */
+    #languageButton, #allCharactersButton, #TelegramButton {
+        font-size: 0.9rem;
+        padding: 8px 12px;
     }
 
     #TelegramButton {
-        left: calc(10px + 60px);
-        width: 35px;
-        height: 35px;
-        padding: 0;
-    }
-
-    .icon-small {
         width: 20px;
         height: 20px;
+        padding: 0;
     }
 }
 

@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Jane Doe': { image: 'images/JaneDoe.webp', back_image: 'images/backImages/JaneDoe.webp', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
         'Nicole Demara': { image: 'images/NicoleDemara.webp', back_image: 'images/backImages/NicoleDemara.webp', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.webp' } },
         'Burnice White': { image: 'images/BurniceWhite.webp', back_image: 'images/backImages/BurniceWhite.webp', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp' } },
-        'Caesar King': { image: 'images/CaesarKing.webp', back_image: 'images/backImages/CaesarKing.webp', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.png' } },
+        'Caesar King': { image: 'images/CaesarKing.webp', back_image: 'images/backImages/CaesarKing.webp', faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp' } },
         'Zhu Yuan': { image: 'images/Zhuyuan.webp', back_image: 'images/backImages/Zhuyuan.webp', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
         'Hoshimi Miyabi': { image: 'images/Miyabi.webp', back_image: 'images/backImages/Miyabi.webp', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },
         'Tsukishiro Yanagi': { image: 'images/Yanagi.webp', back_image: 'images/backImages/Yanagi.webp', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },

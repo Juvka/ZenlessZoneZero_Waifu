@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'newCharacterButton': 'Выбрать агента',
             'chooseAnother': 'Выбрать другую',
             'noFaction': 'Нет фракции',
+            'allCharactersButton': 'Все персонажи',
             'factions': {
                 '«Группа особого реагирования угрозыска»': '«Threat Investigation Special Response Team»',
                 '«Хитрые зайцы»': '«Gentle House»',
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'newCharacterButton': 'Choose agent',
             'chooseAnother': 'Choose another',
             'noFaction': 'No faction',
+            'allCharactersButton': 'All characters',
             'factions': {
                 '«Threat Investigation Special Response Team»': '«Группа особого реагирования угрозыска»',
                 '«Gentle House»': '«Хитрые зайцы»',
@@ -52,6 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
         dynamicButtons.forEach(btn => {
             btn.textContent = translations[currentLanguage]['chooseAnother'];
         });
+
+        const allCharactersButton = document.getElementById('allCharactersButton');
+        if (allCharactersButton) {
+        allCharactersButton.textContent = translations[currentLanguage]['allCharactersButton'];
+        }
 
         const factionNames = document.querySelectorAll('#faction-name');
         factionNames.forEach(el => {

@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Zhu Yuan': { image: 'images/Zhuyuan.webp', back_image: 'images/backImages/Zhuyuan.webp', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
         'Hoshimi Miyabi': { image: 'images/Miyabi.webp', back_image: 'images/backImages/Miyabi.webp', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },
         'Tsukishiro Yanagi': { image: 'images/Yanagi.webp', back_image: 'images/backImages/Yanagi.webp', faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' } },
-        'Grace Howard': { image: 'images/GraceHoward.webp', back_image: 'images/backImages/GraceHoward.webp', faction: { name: '«Белобог»', image: 'images/factions/Belobog.png' } },
+        'Grace Howard': { image: 'images/GraceHoward.webp', back_image: 'images/backImages/GraceHoward.webp', faction: { name: '«Белобог»', image: 'images/factions/Belobog.webp' } },
         'Ellen Joe': { image: 'images/EllenJoe.webp', back_image: 'images/backImages/EllenJoe.webp', faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.webp' } },
         'Evelyn Chevalier': { image: 'images/Evelyn.webp', back_image: 'images/backImages/Evelyn.webp', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' } },
         'Astra Yao': { image: 'images/AstraYao.webp', back_image: 'images/backImages/AstraYao.webp', faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' } },

@@ -1,0 +1,86 @@
+/* characters.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.character-card {
+    background: rgba(42, 22, 30, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 220px; /* Фиксированная ширина для предсказуемости */
+}
+
+.character-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(255, 194, 194, 0.3);
+}
+
+.character-card img.char-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid rgba(255, 194, 194, 0.752);
+}
+
+.character-card h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-faction-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    min-height: 30px; 
+}
+
+.card-faction-info img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-faction-info span {
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .character-card {
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .character-card img.char-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .character-card h3 {
+        font-size: 1.1rem;
+    }
+}

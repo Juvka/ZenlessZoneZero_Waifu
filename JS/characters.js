@@ -64,6 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         card.appendChild(factionInfo);
+        
+        // Создание кнопки "Подробнее"
+        const detailsButton = document.createElement('a');
+        detailsButton.href = '#'; // Можно изменить на реальную ссылку
+        detailsButton.className = 'details-button';
+        detailsButton.textContent = 'Подробнее';
+        card.appendChild(detailsButton);
+
         container.appendChild(card);
     });
 

@@ -1,10 +1,15 @@
 /* characters.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 40px 20px;
+    background: linear-gradient(135deg, #1a0a12 0%, #2a161e 100%);
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
 }
 
 .grid-container {
@@ -12,25 +17,53 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    max-width: 1800px;
+    max-width: 2000px;
     margin: 0 auto;
 }
 
 .character-card {
-    background: rgba(42, 22, 30, 0.6);
-    border-radius: 15px;
-    padding: 20px;
+    background: linear-gradient(145deg, rgba(42, 22, 30, 0.8) 0%, rgba(28, 15, 20, 0.9) 100%);
+    border-radius: 20px;
+    padding: 25px;
     text-align: center;
     color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 220px; /* Фиксированная ширина для предсказуемости */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 194, 194, 0.15);
+    width: 240px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 769px) {
+    .character-card {
+        opacity: 0;
+        animation: card-appear 0.6s ease-out forwards;
+    }
+}
+
+.character-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,194,194,0.1) 0%, transparent 70%);
+    transform: rotate(30deg);
+    transition: all 0.6s ease;
+    opacity: 0;
 }
 
 .character-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(255, 194, 194, 0.3);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(255, 194, 194, 0.2);
+    border-color: rgba(255, 194, 194, 0.3);
+}
+
+.character-card:hover::before {
+    opacity: 1;
+    transform: rotate(30deg) translate(10%, 10%);
 }
 
 .character-card img.char-image {
@@ -38,14 +71,28 @@ body {
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 15px;
-    border: 3px solid rgba(255, 194, 194, 0.752);
+    margin-bottom: 20px;
+    border: 4px solid rgba(255, 194, 194, 0.8);
+    box-shadow: 0 0 20px rgba(255, 194, 194, 0.4);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.character-card:hover img.char-image {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 194, 194, 0.6);
+    border-color: rgba(255, 194, 194, 1);
 }
 
 .character-card h3 {
     font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #ffc2c2;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .card-faction-info {
@@ -53,34 +100,115 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-top: 10px;
-    min-height: 30px; 
+    margin-top: 15px;
+    min-height: 30px;
+    position: relative;
+    z-index: 1;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.character-card:hover .card-faction-info {
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .card-faction-info img {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card-faction-info span {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #ffffff;
+    opacity: 0.9;
 }
 
-/* Адаптивность */
+/* Кнопка "На главную" */
+#homeButton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1vw;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.6vw 1.2vw;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+#homeButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Адаптивные стили для кнопки "На главную" */
 @media (max-width: 768px) {
+    #homeButton {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        top: 10px;
+        left: 10px;
+    }
+}
+
+/* Адаптивность для карточек */
+@media (max-width: 768px) {
+    .grid-container {
+        gap: 20px;
+    }
+    
     .character-card {
-        width: 150px;
+        width: 160px;
         padding: 15px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .character-card.is-visible {
+        opacity: 1;
+        transform: translateY(0);
     }
     
     .character-card img.char-image {
         width: 100px;
         height: 100px;
+        border-width: 3px;
     }
 
     .character-card h3 {
         font-size: 1.1rem;
+        margin-bottom: 10px;
     }
+    
+    .card-faction-info {
+        flex-direction: column;
+        gap: 5px;
+        padding: 6px;
+    }
+    
+    .card-faction-info span {
+        font-size: 0.7rem;
+    }
+}
+
+.character-card:hover .card-faction-info span:only-child {
+    color: #ffc2c2;
+    font-weight: 600;
 }

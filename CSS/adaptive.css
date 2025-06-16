@@ -11,6 +11,7 @@
         flex-direction: column;
         justify-content: flex-start; /* Изменено с center на flex-start */
         align-items: center;
+        
     }
 
     .grid-container {
@@ -191,7 +192,6 @@
     }
 }
 
-/* Планшетная версия (769px - 1024px) - без изменений */
 @media (min-width: 769px) and (max-width: 1024px) {
     #character {
         width: 35vw;
@@ -201,7 +201,6 @@
     }
 }
 
-/* Адаптация для ландшафтного режима на мобильных */
 @media (max-width: 768px) and (orientation: landscape) {
     #character-wrapper {
         flex-direction: row;
@@ -234,10 +233,78 @@
     }
 }
 
-/* Эффект для карточек только на мобильных */
 @media (max-width: 768px) {
     .character-card:hover .card-faction-info span:only-child {
         color: #ffc2c2;
         font-weight: 600;
+    }
+}
+
+/* Адаптивные стили для кнопки "На главную" */
+@media (max-width: 768px) {
+    #homeButton {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        top: 10px;
+        left: 10px;
+    }
+}
+
+/* Адаптивность для карточек */
+@media (max-width: 768px) {
+    .grid-container {
+        gap: 20px;
+    }
+    
+    .character-card {
+        width: 160px;
+        padding: 20px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .character-card.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .character-card img.char-image {
+        width: 100px;
+        height: 100px;
+        border-width: 3px;
+    }
+
+    .character-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .card-faction-info {
+        flex-direction: column;
+        gap: 5px;
+        padding: 6px;
+    }
+    
+    .card-faction-info span {
+        font-size: 0.7rem;
+    }
+
+    /* Делаем кнопку "Подробнее" видимой на мобильных устройствах */
+    .details-button {
+        margin-top: 15px;
+        padding: 8px 15px;
+        font-size: 0.8rem;
+        width: auto;
+        display: inline-block;
+    }
+
+    .character-card:hover .details-button {
+        transform: scale(1.05);
+    }
+
+    .character-card:hover .card-faction-info {
+        opacity: 1;
+        transform: none;
     }
 }

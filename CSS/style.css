@@ -206,7 +206,7 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
-    white-space: nowrap; /* Запрещаем перенос текста в кнопке */
+    white-space: nowrap; 
 }
 
 #languageButton:hover, #allCharactersButton:hover {

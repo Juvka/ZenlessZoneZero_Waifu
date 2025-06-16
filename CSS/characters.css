@@ -7,9 +7,11 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 40px 20px;
-    background: linear-gradient(135deg, #1a0a12 0%, #2a161e 100%);
     font-family: 'Montserrat', sans-serif;
     position: relative;
+    animation: gradient 15s ease infinite;
+    background: linear-gradient(45deg, #171009, #2a161e, #0a1c22, #081d18);
+    background-size: 400% 400%;
 }
 
 .grid-container {
@@ -119,7 +121,6 @@ body {
     height: 28px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card-faction-info span {
@@ -127,6 +128,37 @@ body {
     font-weight: 500;
     color: #ffffff;
     opacity: 0.9;
+}
+
+/* Стили для новой кнопки "Подробнее" */
+.details-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    color: white;
+    background: rgba(255, 194, 194, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative; 
+    transform: none; 
+    left: auto;
+    bottom: auto;
+    opacity: 1;
+    z-index: 2;
+}
+
+.character-card:hover .details-button {
+    transform: scale(1.15); /* Оставляем только масштаб */
+}
+
+.details-button:hover {
+    background: rgba(255, 194, 194, 0.3);
+    transform: translateX(-50%) scale(1.05);
 }
 
 /* Кнопка "На главную" */
@@ -155,57 +187,6 @@ body {
 #homeButton:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
-}
-
-/* Адаптивные стили для кнопки "На главную" */
-@media (max-width: 768px) {
-    #homeButton {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-        top: 10px;
-        left: 10px;
-    }
-}
-
-/* Адаптивность для карточек */
-@media (max-width: 768px) {
-    .grid-container {
-        gap: 20px;
-    }
-    
-    .character-card {
-        width: 160px;
-        padding: 15px;
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-
-    .character-card.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    .character-card img.char-image {
-        width: 100px;
-        height: 100px;
-        border-width: 3px;
-    }
-
-    .character-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-    
-    .card-faction-info {
-        flex-direction: column;
-        gap: 5px;
-        padding: 6px;
-    }
-    
-    .card-faction-info span {
-        font-size: 0.7rem;
-    }
 }
 
 .character-card:hover .card-faction-info span:only-child {

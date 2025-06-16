@@ -15,7 +15,7 @@
 
     .grid-container {
         gap: 20px;
-        padding-top: 7px; /* Дополнительный отступ */
+        padding-top: 20px; /* Дополнительный отступ */
     }
 
     .character-card {
@@ -156,11 +156,9 @@
     }
 
     #newCharacterButton {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
         padding: 10px 20px;
-        top: 45%;
-        left: 10%;
-        position: absolute;
+        margin-top: 20px;
         text-align: center;
         width: auto;
         border-radius: 25px;

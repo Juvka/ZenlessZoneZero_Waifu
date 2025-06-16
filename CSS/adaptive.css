@@ -158,7 +158,9 @@
     #newCharacterButton {
         font-size: 1.8rem;
         padding: 10px 20px;
-        margin-top: 340px;
+        top: 50%;
+        left: 10%;
+        position: absolute;
         text-align: center;
         width: auto;
         border-radius: 25px;

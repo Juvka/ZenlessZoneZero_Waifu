@@ -20,76 +20,67 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const container = document.querySelector('.grid-container');
-    // Проверяем ширину экрана, чтобы определить, мобильное ли устройство
     const isMobile = window.innerWidth <= 768;
-    let cardIndex = 0; // Счетчик для задержки анимации на ПК
 
-    for (const characterName in characters) {
-        if (Object.hasOwnProperty.call(characters, characterName)) {
-            const characterData = characters[characterName];
-
-            const card = document.createElement('div');
-            card.className = 'character-card';
-
-            if (!isMobile) {
-                // Устанавливаем свойство animation-delay для создания эффекта волны
-                card.style.animationDelay = `${cardIndex * 0.07}s`;
-            }
-
-            const img = document.createElement('img');
-            img.src = characterData.image;
-            img.alt = characterName;
-            img.className = 'char-image';
-            card.appendChild(img);
-
-            const name = document.createElement('h3');
-            name.textContent = characterName;
-            card.appendChild(name);
-
-            const factionInfo = document.createElement('div');
-            factionInfo.className = 'card-faction-info';
-
-            if (characterData.faction) {
-                const factionImg = document.createElement('img');
-                factionImg.src = characterData.faction.image;
-                factionImg.alt = characterData.faction.name;
-                factionInfo.appendChild(factionImg);
-
-                const factionName = document.createElement('span');
-                factionName.textContent = characterData.faction.name;
-                factionInfo.appendChild(factionName);
-            } else {
-                const noFactionName = document.createElement('span');
-                noFactionName.textContent = 'Нет фракции';
-                factionInfo.appendChild(noFactionName);
-            }
-            card.appendChild(factionInfo);
-            
-            container.appendChild(card);
-            cardIndex++; // Увеличиваем счетчик
+    // Создаем карточки персонажей
+    Object.entries(characters).forEach(([characterName, characterData], index) => {
+        const card = document.createElement('div');
+        card.className = 'character-card';
+        
+        // Для мобильных - добавляем задержку анимации для эффекта последовательного появления
+        if (isMobile) {
+            card.style.transitionDelay = `${index * 0.1}s`;
         }
-    }
 
+        // Изображение персонажа
+        const img = document.createElement('img');
+        img.src = characterData.image;
+        img.alt = characterName;
+        img.className = 'char-image';
+        card.appendChild(img);
+
+        // Имя персонажа
+        const name = document.createElement('h3');
+        name.textContent = characterName;
+        card.appendChild(name);
+
+        // Информация о фракции
+        const factionInfo = document.createElement('div');
+        factionInfo.className = 'card-faction-info';
+
+        if (characterData.faction) {
+            const factionImg = document.createElement('img');
+            factionImg.src = characterData.faction.image;
+            factionImg.alt = characterData.faction.name;
+            factionInfo.appendChild(factionImg);
+
+            const factionName = document.createElement('span');
+            factionName.textContent = characterData.faction.name;
+            factionInfo.appendChild(factionName);
+        } else {
+            const noFactionName = document.createElement('span');
+            noFactionName.textContent = 'Нет фракции';
+            factionInfo.appendChild(noFactionName);
+        }
+        
+        card.appendChild(factionInfo);
+        container.appendChild(card);
+    });
+
+    // Анимация появления карточек при прокрутке (только для мобильных)
     if (isMobile) {
-        const cards = document.querySelectorAll('.character-card');
-
-        // Создаем "наблюдателя" за пересечением
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // Если карточка появилась в зоне видимости
                 if (entry.isIntersecting) {
-                    // Добавляем класс для запуска анимации
                     entry.target.classList.add('is-visible');
-                    // Отключаем наблюдение за этой карточкой, чтобы анимация не повторялась
-                    observer.unobserve(entry.target);
                 }
             });
         }, {
-            rootMargin: '0px 0px -50px 0px' // Начинаем анимацию чуть раньше, чем элемент полностью появится
+            threshold: 0.1,
+            rootMargin: '0px 0px -20px 0px'
         });
 
-        // "Навешиваем" наблюдателя на каждую карточку
-        cards.forEach(card => {
+        document.querySelectorAll('.character-card').forEach(card => {
             observer.observe(card);
         });
     }

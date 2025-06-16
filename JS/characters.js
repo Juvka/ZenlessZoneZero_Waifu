@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Этот объект скопирован из вашего script.js
     const characters = {
         'Jane Doe': { image: 'images/JaneDoe.webp', back_image: 'images/backImages/JaneDoe.webp', faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' } },
         'Nicole Demara': { image: 'images/NicoleDemara.webp', back_image: 'images/backImages/NicoleDemara.webp', faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.webp' } },
@@ -21,39 +20,41 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const container = document.querySelector('.grid-container');
+    // Проверяем ширину экрана, чтобы определить, мобильное ли устройство
+    const isMobile = window.innerWidth <= 768;
+    let cardIndex = 0; // Счетчик для задержки анимации на ПК
 
     for (const characterName in characters) {
         if (Object.hasOwnProperty.call(characters, characterName)) {
             const characterData = characters[characterName];
 
-            // Создаем элемент карточки
             const card = document.createElement('div');
             card.className = 'character-card';
 
-            // Создаем и добавляем изображение
+            if (!isMobile) {
+                // Устанавливаем свойство animation-delay для создания эффекта волны
+                card.style.animationDelay = `${cardIndex * 0.07}s`;
+            }
+
             const img = document.createElement('img');
             img.src = characterData.image;
             img.alt = characterName;
             img.className = 'char-image';
             card.appendChild(img);
 
-            // Создаем и добавляем имя персонажа
             const name = document.createElement('h3');
             name.textContent = characterName;
             card.appendChild(name);
 
-            // Создаем контейнер для информации о фракции
             const factionInfo = document.createElement('div');
             factionInfo.className = 'card-faction-info';
 
             if (characterData.faction) {
-                // Добавляем изображение фракции
                 const factionImg = document.createElement('img');
                 factionImg.src = characterData.faction.image;
                 factionImg.alt = characterData.faction.name;
                 factionInfo.appendChild(factionImg);
 
-                // Добавляем название фракции
                 const factionName = document.createElement('span');
                 factionName.textContent = characterData.faction.name;
                 factionInfo.appendChild(factionName);
@@ -63,9 +64,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 factionInfo.appendChild(noFactionName);
             }
             card.appendChild(factionInfo);
-
-            // Добавляем полностью собранную карточку в контейнер
+            
             container.appendChild(card);
+            cardIndex++; // Увеличиваем счетчик
         }
+    }
+
+    if (isMobile) {
+        const cards = document.querySelectorAll('.character-card');
+
+        // Создаем "наблюдателя" за пересечением
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // Если карточка появилась в зоне видимости
+                if (entry.isIntersecting) {
+                    // Добавляем класс для запуска анимации
+                    entry.target.classList.add('is-visible');
+                    // Отключаем наблюдение за этой карточкой, чтобы анимация не повторялась
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -50px 0px' // Начинаем анимацию чуть раньше, чем элемент полностью появится
+        });
+
+        // "Навешиваем" наблюдателя на каждую карточку
+        cards.forEach(card => {
+            observer.observe(card);
+        });
     }
 });

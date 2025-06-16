@@ -15,7 +15,7 @@
 
     .grid-container {
         gap: 20px;
-        padding-top: 20px; /* Дополнительный отступ */
+        padding-top: 7px; /* Дополнительный отступ */
     }
 
     .character-card {

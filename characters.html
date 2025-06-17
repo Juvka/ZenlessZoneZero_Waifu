@@ -4,14 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Все персонажи - Zenless Zone Zero</title>
-    <link rel="stylesheet" href="CSS/animations.css">
-    <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/characters.css">
     <link rel="stylesheet" href="CSS/adaptive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <a href="index.html" id="homeButton">На главную</a>
+    
     <div class="grid-container"></div>
+
+    <div id="characterModal" class="modal-overlay">
+      <div class="modal-content">
+        <button class="close-button">&times;</button>
+        <div class="modal-image-container">
+            <img id="modalCharImage" src="" alt="Изображение персонажа">
+        </div>
+        <div class="modal-scrollable-content">
+            <div class="modal-text-content">
+                <h2 id="modalCharName"></h2>
+                <div id="modalCharFaction" class="modal-faction-info">
+                    <img id="modalFactionImage" src="" alt="Изображение фракции">
+                    <span id="modalFactionName"></span>
+                </div>
+                <div class="modal-char-details">
+                    <p><strong>Ранг:</strong> <span id="modal-char-weapon">н/д</span></p>
+                    <p><strong>Рост:</strong> <span id="modal-char-height">н/д</span></p>
+                    <p><strong>Дата рождения:</strong> <span id="modal-char-birthdate">н/д</span></p>
+                </div>
+                <p id="modalCharDescription"></p>
+                <div class="modal-quote-container">
+                    <p id="modalCharQuote"></p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
     <script src="JS/characters.js"></script>
 </body>
 </html>

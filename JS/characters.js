@@ -90,7 +90,7 @@ const characters = {
     'character-9': {
         name: 'Ellen Joe',
         image: 'images/EllenJoe.webp',
-        back_image: 'images/backImages/EllenJoe.webp',
+        back_image: 'images/mental/EllenJoe.webp',
         faction: { name: '«Агентство домашнего персонала Виктория»', image: 'images/factions/VictoriaHousekeeping.webp' },
         description: 'Чем проще, тем лучшеЛишним сложностям здесь не рады. Работа не волк Важно вовремя делать перерывы... чтобы работа поменьше бесила. Полная сосредоточенность Подходит она к делу всерьёз или нет, страдают от этого почему-то всегда её враги. Почему бы не побаловать себя сладким? Конфету в рот, а мысли на замок.',
         quote: 'Уф, опять придётся возиться с заказом... Надо было выбрать другую смену.',
@@ -101,7 +101,7 @@ const characters = {
     'character-10': {
         name: 'Evelyn Chevalier',
         image: 'images/Evelyn.webp',
-        back_image: 'images/backImages/Evelyn.webp',
+        back_image: 'images/mental/Evelyn.webp',
         faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' },
         description: 'На десять часов подозрительный мужчина в чёрном. Я разберусь. Вы следите за периметром — к Астре никто не должен приближаться. Ближе этого места никого не подпускайте.',
         quote: 'Госпожа Яо отдыхает. Никаких интервью.',
@@ -112,7 +112,7 @@ const characters = {
     'character-11': {
         name: 'Astra Yao',
         image: 'images/AstraYao.webp',
-        back_image: 'images/backImages/AstraYao.webp',
+        back_image: 'images/mental/AstraYao.webp',
         faction: { name: '«Созвездие Лиры»', image: 'images/factions/StarsofLyra.webp' },
         description: 'Поздно-поздно! Я официально приглашаю тебя поучаствовать в моём побеге! План такой: забить на работу, сбежать и, наконец, попасть на Реверб-арену! «А знаешь, это приятно, когда люди тебя узнают! Каждому поколению нужна своя звезда. Люди вручают ей свои мечты, а она должна принести им надежду. Привет, Нью-Эриду! Вы готовы? Сейчас здесь начнётся невероятное волшебство!',
         quote: 'Следующую песню я посвящаю этому миру!',
@@ -134,7 +134,7 @@ const characters = {
     'character-13': {
         name: 'Soldier 0 Anby',
         image: 'images/Soldier0Anby.webp',
-        back_image: 'images/backImages/Soldier0Anby.webp',
+        back_image: 'images/mental/Soldier0Anby.webp',
         faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.webp'},
         description: 'Загадочная девушка, которая никогда не рассказывает о своей биографии, словно бы у неё нет прошлого. Спокойная и сдержанная, она обладает чрезвычайно эффективными боевыми навыками, за которыми явно кроются долгие годы подготовки. Когда Николь «подобрала» её после одного происшествия, Энби стала одной из «Хитрых зайцев» и сильно привязалась к Николь. Больше всего она любит смотреть кино, но из-за своей неискушённости принимает истории на экране за правду.',
         quote: 'Новая экипировка перед большой битвой. Хм, в кино всегда так делают',
@@ -145,7 +145,7 @@ const characters = {
     'character-14': {
         name: 'Pulchra Fellini',
         image: 'images/Pulchra.webp' ,
-        back_image: 'images/backImages/Pulchra.webp',
+        back_image: 'images/mental/Pulchra.webp',
         faction: {name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp'},
         description: 'Я, Пульхра, готова присоединиться к вам, Сыны Калидона. Предательство? К чему такие громкие слова?. Это всего лишь разумный выбор. Не радуйтесь раньше времени. Вы ещё не прошли испытательный срок. А когда он кончится, это уж мне решать.',
         quote: 'Я безоговорочно предана только победителю. А кто у нас побеждает? Я и каждый раз я',
@@ -156,7 +156,7 @@ const characters = {
     'character-15': {
         name: 'Trigger' ,
         image: 'images/Trigger.webp',
-        back_image: 'images/backImages/Trigger.webp',
+        back_image: 'images/mental/Trigger.webp',
         faction: {name: '«Отряд Обол»', image: 'images/factions/Obol.webp'},
         description: 'Я найду истинных виновников падения старой столицы, и они заплатят за всё. Если лодочник, готовый переправить меня в земли истины, потребует плату... я не пожалею собственной жизни. Под защитой воли, держащей ненависть под контролем, я беру истину на прицел.',
         quote: 'Я тебя вижу',
@@ -167,7 +167,7 @@ const characters = {
     'character-16': {
         name: 'Vivian Banshee' ,
         image: 'images/Vivian.webp',
-        back_image: 'images/backImages/Vivian.webp',
+        back_image: 'images/mental/Vivian.webp',
         faction: {name: '«Пересмешники»', image: 'images/factions/Mockingbird.webp'},
         description: 'Разбойники? Воры? Называй как хочешь, я не спорю с отребьем. Мой зонтик я разделю только с господином Фаэтоном. Как же я хочу, чтобы взгляд Фаэтона был прикован только ко мне.',
         quote: 'Не закрывай окно: птицы принесут любовь и унесут смерть',
@@ -178,7 +178,7 @@ const characters = {
     'character-17': {
         name: 'Yixuan' ,
         image: 'images/Yixuan.webp',
-        back_image: 'images/backImages/Yixuan.webp',
+        back_image: 'images/mental/YixuanCinema.webp',
         faction: {name: '«Школа горы Юнькуй»', image: 'images/factions/YunkuiSummit.webp'},
         description: 'Хочешь научиться читать небесные знамения и предсказывать погоду? Понятно. Возьми несколько из этих наспех нарисованных талисманов. Сфотографируй и поставь себе на обои. А потом просто открывай приложение погоды — оно и скажет, завтра солнечно, облачно или дождь пойдёт. И да, понадобится стабильное интернет-соединение.',
         quote: 'Переступив порог монастыря, оставьте мирские заботы и церемонии у подножия горы',

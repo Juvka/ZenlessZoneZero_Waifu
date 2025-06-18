@@ -203,7 +203,7 @@ body {
     z-index: 1000;
     display: flex;
     align-items: center;
-    gap: 10px; /* Создает отступ между кнопками */
+    gap: 10px; 
 }
 
 /* Общие стили для кнопок в шапке */
@@ -222,7 +222,8 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
-    white-space: nowrap; /* Запрещаем перенос текста в кнопке */
+    white-space: nowrap; 
+    user-select: none;
 }
 
 #languageButton:hover, #allCharactersButton:hover {

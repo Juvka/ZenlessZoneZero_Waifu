@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+::selection {
+    background-color: #4e182e;
+    color: #ffffff;
+}
+
 body {
     display: flex;
     justify-content: center;

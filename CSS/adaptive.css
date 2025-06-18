@@ -1,18 +1,16 @@
-/* adaptive.css */
-
 /* --- Мобильная версия (до 768px) --- */
 @media (max-width: 768px) {
     /* --- Основная структура --- */
     body {
         font-size: 16px;
-        background: #171009; /* Упрощенный фон для производительности */
-        padding: 70px 15px 30px;
+        background: #171009;
+        padding: 20px 15px;
         margin: 0;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
+        justify-content: center; /* Центрирование по вертикали */
+        align-items: center; /* Центрирование по горизонтали */
         box-sizing: border-box;
     }
 
@@ -21,10 +19,12 @@
         max-width: 100%;
         padding: 20px 0;
         box-sizing: border-box;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 0;
+        flex-grow: 1;
     }
 
     /* --- Кнопки в шапке --- */
@@ -35,7 +35,7 @@
         z-index: 1000;
         display: flex;
         align-items: center;
-        gap: 8px; 
+        gap: 8px;
     }
 
     /* Общие стили для текстовых кнопок */
@@ -43,7 +43,7 @@
         font-family: 'Montserrat', sans-serif;
         border: none;
         cursor: pointer;
-        font-size: 1rem; /* Оптимальный размер для мобильных */
+        font-size: 1rem;
         color: white;
         background: rgba(255, 255, 255, 0.1);
         padding: 0px 16px;
@@ -71,110 +71,132 @@
         background: none;
     }
     
-    #homeButton {
-        font-size: 16px;
-        top: 10px;
-        left: 0px;
-        padding: 8px 16px;
-        margin-left: 78px;
-    }
-
     #TelegramButton:hover {
-        background: none; 
+        background: none;
     }
 
-    /* --- Начальная кнопка "Выбрать агента" --- */
-    #newCharacterButton {
-        font-size: 2rem; /* Адаптированный размер шрифта */
-    }
-
-    /* --- Динамический контент после нажатия --- */
-    #character-wrapper {
+    /* --- Основной контент (центрированный) --- */
+    #main-content {
+        display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         width: 100%;
+        flex-grow: 1;
+    }
+
+    /* --- Контейнер с персонажем --- */
+    #character-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 20px;
         text-align: center;
-        gap: 20px; /* Скорректированный отступ */
+        margin: auto;
     }
 
     #character {
-        margin: 0 0 15px 0; /* Уменьшенный нижний отступ */
+        margin: 0;
         width: 70vw;
         height: 70vw;
-        max-width: 280px; /* Максимальный размер карточки */
+        max-width: 280px;
         max-height: 280px;
         -webkit-tap-highlight-color: transparent;
     }
 
+    /* --- Информация о персонаже --- */
     #info-wrapper {
-        padding-left: 0; /* Убираем отступ слева для центрирования */
+        display: flex;
+        flex-direction: column;
         align-items: center;
-    }
-    
-    #character-name {
-        font-size: 2.5rem; /* Адаптированный размер имени */
-        letter-spacing: 1px;
+        justify-content: center;
+        width: 100%;
+        padding-left: 0;
     }
 
+    #character-name {
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        color: white;
+        text-align: center;
+    }
+
+    /* Блок фракции */
     #faction-info {
-        margin-bottom: 25px; /* Увеличенный отступ для кнопки */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        gap: 8px;
     }
 
     #faction-image {
-        width: 28px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
+        margin-right: 0;
+        margin-bottom: 5px;
     }
 
     #faction-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        color: white;
+        text-align: center;
     }
 
     /* Кнопка "Выбрать другую" */
     .container #newCharacterButton {
-        font-size: 1.1rem;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 10px 20px;
-        animation: none; /* Отключаем пульсацию */
-    }
-
-    /* Убираем эффект подчеркивания на мобильных */
-    .container #newCharacterButton::after {
-        display: none;
-    }
-    
-    .container #newCharacterButton:hover {
+        font-size: 1.8rem;
+        background: none;
+        padding: 12px 24px;
+        margin-top: 20px;
         color: white;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        width: auto;
+        align-self: center;
     }
 
-    /* --- Стили для модального окна со страницы characters.html --- */
+    .container #newCharacterButton:hover {
+        transform: scale(1.05);
+    }
+
+    /* --- Модальное окно --- */
     .modal-content {
         max-height: 85vh;
     }
 
     .modal-quote-container {
-        position: static; /* Remove absolute positioning */
-        margin-top: 20px; /* Add some top margin */
-        max-width: 100%; /* Use full width */
-        text-align: center; /* Center the text */
-        padding-right: 0; /* Remove right padding */
-        bottom: auto; /* Remove bottom positioning */
-        right: auto; /* Remove right positioning */
+        position: static;
+        margin-top: 20px;
+        max-width: 100%;
+        text-align: center;
+        padding-right: 0;
+        bottom: auto;
+        right: auto;
     }
 
     #modalCharQuote {
-        margin-top: 20px; /* Reduce margin-top, it was 80px */
-        font-size: 0.95rem; /* Slightly smaller font size for readability */
-        padding-right: 0px; /* Ensure no extra padding pushes text */
-        text-align: center; /* Ensure quote text is centered */
+        margin-top: 20px;
+        font-size: 0.95rem;
+        padding-right: 0px;
+        text-align: center;
     }
+
     #modalCharQuote::after {
-        height: 80%; /* Make the line shorter */
-        top: 10%; /* Center the shorter line */
+        height: 80%;
+        top: 10%;
         right: 0px;
     }
 
     .modal-text-content {
-        padding: 25px 20px; /* Adjust padding for smaller screens */
+        padding: 25px 20px;
         text-align: left;
     }
 
@@ -195,37 +217,62 @@
 
 /* --- Горизонтальная ориентация на мобильных --- */
 @media (max-width: 1024px) and (orientation: landscape) {
+    body {
+        justify-content: center;
+    }
+    
     #character-wrapper {
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
         gap: 30px;
+        margin: 0 auto;
     }
     
     #character {
         margin: 0;
-        width: 40vh;
-        height: 40vh;
+        width: 40vw;
+        height: 40vw;
+        max-width: 280px;
+        max-height: 280px;
     }
         
     #info-wrapper {
-        align-items: flex-start;
-        text-align: left;
+        align-items: center;
+        max-width: 50%;
     }
     
-    #character-name, #faction-name {
-        text-align: left;
+    #character-name {
+        font-size: 2.2rem;
+        text-align: center;
+        margin-bottom: 15px;
     }
     
     #faction-info {
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
+        margin-bottom: 20px;
+        gap: 8px;
     }
     
     #faction-image {
-        margin-right: 10px;
-        margin-bottom: 0;
+        width: 35px;
+        height: 35px;
+        margin-bottom: 5px;
     }
+
+    #faction-name {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .container #newCharacterButton {
+        align-self: center;
+        margin-top: 15px;
+    }
+
     .modal-text-content {
-        padding: 45px 20px; /* Adjust padding for smaller screens */
+        padding: 45px 20px;
         text-align: center;
     }
 
@@ -233,7 +280,7 @@
         position: absolute;
         bottom: 20px;
         right: 20px;
-        max-width: 40%; /* Adjust max-width for landscape */
+        max-width: 40%;
         text-align: right;
         margin-top: 0;
     }
@@ -241,7 +288,7 @@
     #modalCharQuote {
         margin-top: 0;
         font-size: 0.9rem;
-        padding-right: 25px; /* Re-add padding for the line */
+        padding-right: 25px;
         text-align: right;
     }
 }

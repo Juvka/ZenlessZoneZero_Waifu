@@ -2,7 +2,7 @@ const characters = {
     'character-1': {
         name: 'Jane Doe',
         image: 'images/JaneDoe.webp',
-        back_image: 'images/backImages/JaneDoe.webp',
+        back_image: 'images/mental/JaneDoe.webp',
         faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' },
         description: 'Кто я? Чистокровная кошка-тирен! Ах, такое редкое происхождение когда-то доставляло мне немало хлопот. Ну зачем же мне врать? Мяу!',
         quote: 'Ой, ну это было тогда! Сейчас-то я точно говорю правду! Честно-честно!',
@@ -13,7 +13,7 @@ const characters = {
     'character-2': {
         name: 'Nicole Demara',
         image: 'images/NicoleDemara.webp',
-        back_image: 'images/backImages/NicoleDemara.webp',
+        back_image: 'images/mental/NicoleDemara.webp',
         faction: { name: '«Хитрые зайцы»', image: 'images/factions/CunningHares.webp' },
         description: 'Глава агентства мастеров на все руки «Хитрые зайцы», готовая взяться за самые разные заказы по исследованию каверн После долгих лет на улицах Нью-Эриду Николь заработала среди коллег определённую репутацию. Про неё говорят, что ни одна лиса не может состязаться в хитрости с этой зайкой-пронырой. Из-за хитрости и неразборчивости в средствах Николь многие клиенты внесли её в чёрный список. Несмотря на её любовь к денни, Николь удивительно бездарна в области управления финансами, из-за чего «Хитрые зайцы» вечно оказываются в долгах.',
         quote: 'Мудрый выбор! Но сразу предупреждаю: мои услуги стоят недешёво!',
@@ -24,7 +24,7 @@ const characters = {
     'character-3': {
         name: 'Burnice White',
         image: 'images/BurniceWhite.webp',
-        back_image: 'images/backImages/BurniceWhite.webp',
+        back_image: 'images/mental/BurniceWhite.webp',
         faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp' },
         description: 'Неплохо, да? Для этого нового вкуса "Нитро-топлива" я привезла из города особые ингредиенты. Что? Ты пойдёшь вздремнуть в машину? Боишься, что не уснёшь, если допьёшь? Значит... у тебя есть машина! А у меня тут как раз есть специальное энергосберегающее топливо! Попробуй!',
         quote: 'Что-то ты совсем без настроения. Не хочешь подзаправиться?',
@@ -35,7 +35,7 @@ const characters = {
     'character-4': {
         name: 'Caesar King',
         image: 'images/CaesarKing.webp',
-        back_image: 'images/backImages/CaesarKing.webp',
+        back_image: 'images/mental/CaesarKing.webp',
         faction: { name: '«Сыны Калидона»', image: 'images/factions/SonsofCalydon.webp' },
         description: 'Можешь сесть где угодно. Чувствуй себя как дома». Если уж тебя занесло на Объездную, теперь ты гость Сынов Калидона! Хм... Папаша, а что значит "Долг платежом красен"?',
         quote: 'Я Цезарь, глава Сынов Калидона.',
@@ -46,7 +46,7 @@ const characters = {
     'character-5': {
         name: 'Zhu Yuan',
         image: 'images/Zhuyuan.webp',
-        back_image: 'images/backImages/Zhuyuan.webp',
+        back_image: 'images/mental/ZhuYuan.webp',
         faction: { name: '«Группа особого реагирования угрозыска»', image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' },
         description: 'Минуточку. У вас есть разрешение на это интервью? «Да. Вот разрешение от пресс-службы. Ясно. У вас пять минут. Отсчёт пошёл.',
         quote: 'Капитан Чжу Юань, начальник отдела угрозыска Службы общественной безопасности. Жду указаний.',
@@ -57,7 +57,7 @@ const characters = {
     'character-6': {
         name: 'Hoshimi Miyabi',
         image: 'images/Miyabi.webp',
-        back_image: 'images/backImages/Miyabi.webp',
+        back_image: 'images/mental/HoshimiMiyabi.webp',
         faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' },
         description: 'Нельзя стать мастером, слепо подражая чужому искусству обращения с мечом. Это как новый ксерокс у нас в офисе. Он, конечно, энергосберегающий и экологичный, но если копировать на нём документы без тщательной подготовки, появятся шумы и искажения цвета. Эти искажения станут твоей слабостью. Подобная беспечность недопустима.',
         quote: 'Нарушение порядка недопустимо.',
@@ -68,7 +68,7 @@ const characters = {
     'character-7': {
         name: 'Tsukishiro Yanagi',
         image: 'images/Yanagi.webp',
-        back_image: 'images/backImages/Yanagi.webp',
+        back_image: 'images/mental/Yanagi.webp',
         faction: { name: '«Секция 6»', image: 'images/factions/Section6.webp' },
         description: 'Янаги — специалист по дальнему бою и высоким технологиям. Её дрон-напарник и энергетическая винтовка позволяют контролировать поле боя с безопасного расстояния.',
         quote: 'Цель захвачена. Начинаю ликвидацию.',
@@ -79,7 +79,7 @@ const characters = {
     'character-8': {
         name: 'Grace Howard',
         image: 'images/GraceHoward.webp',
-        back_image: 'images/backImages/GraceHoward.webp',
+        back_image: 'images/mental/GraceHoward.webp',
         faction: { name: '«Белобог»', image: 'images/factions/Belobog.webp' },
         description: 'Грейс, говоришь? — гаечный ключ подскочил с ответом.  — О, благодаря её доброте я впервые в жизни попробовал массаж». Она такая деликатная, — быстро добавил винт. — Мне нравится, как она прикручивает гайки — не слишком туго, в самый раз. Шестерёнка вмешалась: Её разум работает чётко, как хорошо отлаженная коробка передач! «И как она точна, — пробормотало машинное масло. — В её словаре нет места для "капельки" или "среднего количества", одни только абсолютно ясные "миллилитры".',
         quote: 'Такие чёткие и прямые линии, просто красота... Не могу удержаться, чтобы не вскрыть и не посмотреть.',

@@ -76,7 +76,7 @@
         top: 10px;
         left: 0px;
         padding: 8px 16px;
-        margin-left: 17%;
+        margin-left: 78px;
     }
 
     #TelegramButton:hover {
@@ -230,7 +230,6 @@
     }
 
     .modal-quote-container {
-        /* On landscape, you might want it to be at the bottom right again but with less width */
         position: absolute;
         bottom: 20px;
         right: 20px;

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-/* Базовые стили (для больших экранов) */
 body {
     display: flex;
     justify-content: center;
@@ -11,7 +10,7 @@ body {
     animation: gradient 15s ease infinite;
     background: linear-gradient(45deg, #171009, #2a161e, #0a1c22, #081d18);
     background-size: 400% 400%;
-    font-size: 2vw; /* Гибкий размер шрифта */
+    font-size: 2vw; 
 }
 
 .container {
@@ -21,6 +20,10 @@ body {
     padding: 2vw;
     max-width: 90vw;
     flex-wrap: wrap;
+}
+
+.container.animate-in {
+    animation: card-appear 0.8s ease-out forwards; 
 }
 
 #character-wrapper {
@@ -33,9 +36,9 @@ body {
 #character {
     margin-right: 2vw;
     margin-bottom: 2vw;
-    width: 25vw; /* Задаем размеры здесь */
+    width: 25vw;
     height: 25vw;
-    perspective: 1000px; /* Добавляем перспективу для 3D эффекта */
+    perspective: 1000px;
     cursor: pointer;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -82,7 +85,7 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    pointer-events: none; /* Запрещаем события на самом изображении */
+    pointer-events: none; 
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -149,8 +152,8 @@ body {
 }
 
 .container #newCharacterButton {
-    position: relative; /* Изменяем с absolute на relative */
-    margin-top: 0.5vw; /* Добавляем отступ сверху */
+    position: relative; 
+    margin-top: 0.5vw; 
     left: auto;
     bottom: auto;
     transform: none;
@@ -195,7 +198,6 @@ body {
     font-size: 1.5vw;
 }
 
-/* Стили для контейнера кнопок в шапке */
 #top-left-controls {
     position: fixed;
     top: 20px;
@@ -242,7 +244,7 @@ body {
 
 #TelegramButton:hover {
     transform: scale(1.05);
-    background: none; /* Убираем фон при наведении */
+    background: none; 
 }
 
 .icon-small {

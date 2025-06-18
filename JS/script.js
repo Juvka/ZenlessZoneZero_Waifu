@@ -24,16 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
             'noFaction': 'No faction',
             'allCharactersButton': 'All characters',
             'factions': {
-                '«Threat Investigation Special Response Team»': '«Группа особого реагирования угрозыска»',
-                '«Gentle House»': '«Хитрые зайцы»',
-                '«Sons of Calydon»': '«Сыны Калидона»',
-                '«Section 6»': '«Секция 6»',
-                '«Belobog»': '«Белобог»',
-                '«Victoria Housekeeping Agency»': '«Агентство домашнего персонала Виктория»',
-                '«Constellation of Lyra»': '«Созвездие Лиры»',
-                '«Obol Squad»': '«Отряд Обол»',
-                '«Mockingbirds»': '«Пересмешники»',
-                '«Yunkui Summit School»': '«Школа горы Юнькуй»'
+                // Здесь ключи - это русские названия, а значения - их английские переводы
+                '«Группа особого реагирования угрозыска»': '«Threat Investigation Special Response Team»',
+                '«Хитрые зайцы»': '«Gentle House»',
+                '«Сыны Калидона»': '«Sons of Calydon»',
+                '«Секция 6»': '«Section 6»',
+                '«Белобог»': '«Belobog»',
+                '«Агентство домашнего персонала Виктория»': '«Victoria Housekeeping Agency»',
+                '«Созвездие Лиры»': '«Constellation of Lyra»',
+                '«Отряд Обол»': '«Obol Squad»',
+                '«Пересмешники»': '«Mockingbirds»',
+                '«Школа горы Юнькуй»': '«Yunkui Summit School»'
             }
         }
     };
@@ -62,15 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const factionNames = document.querySelectorAll('#faction-name');
         factionNames.forEach(el => {
-            const originalName = el.dataset.originalName;
+            const originalName = el.dataset.originalName; // Получаем оригинальное (русское) название
+
             if (originalName) {
+                // Если текущий язык английский, ищем перевод по русскому названию
                 if (currentLanguage === 'en') {
-                    const englishName = Object.keys(translations['en']['factions']).find(key => translations['ru']['factions'][key] === originalName);
-                    el.textContent = englishName || originalName;
+                    el.textContent = translations['en']['factions'][originalName] || originalName;
                 } else {
+                    // Если текущий язык русский, используем оригинальное название
                     el.textContent = originalName;
                 }
             } else if (el.textContent === translations['ru']['noFaction'] || el.textContent === translations['en']['noFaction']) {
+                // Обработка "Нет фракции" / "No faction"
                 el.textContent = translations[currentLanguage]['noFaction'];
             }
         });
@@ -126,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         imgElementFront.alt = 'Character Image Front';
         cardFront.appendChild(imgElementFront);
 
-        const cardBack = document.createElement('div');
+        const cardBack = document = document.createElement('div');
         cardBack.className = 'character-card-back';
         const imgElementBack = document.createElement('img');
         imgElementBack.alt = 'Character Image Back';
@@ -207,10 +211,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const factionName = document.createElement('span');
                 factionName.id = 'faction-name';
+                // Сохраняем оригинальное (русское) название фракции в dataset
                 factionName.dataset.originalName = characterData.faction.name;
+                // Присваиваем текст в зависимости от текущего языка
                 factionName.textContent = currentLanguage === 'ru'
                     ? characterData.faction.name
-                    : (translations['ru']['factions'][characterData.faction.name] || characterData.faction.name);
+                    : (translations['en']['factions'][characterData.faction.name] || characterData.faction.name);
+
 
                 newFactionInfo.appendChild(factionImage);
                 newFactionInfo.appendChild(factionName);
@@ -221,6 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const factionName = document.createElement('span');
                 factionName.id = 'faction-name';
+                // Для "Нет фракции" также сохраняем в dataset, чтобы можно было переключать
+                factionName.dataset.originalName = translations['ru']['noFaction']; // Сохраняем русское "Нет фракции"
                 factionName.textContent = translations[currentLanguage]['noFaction'];
 
                 newFactionInfo.appendChild(factionName);

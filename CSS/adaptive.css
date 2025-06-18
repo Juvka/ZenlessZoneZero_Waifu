@@ -4,19 +4,59 @@
     body {
         font-size: 16px;
         background: #171009;
-        padding: 70px 15px 30px; /* Добавлен отступ сверху для кнопки */
+        padding: 70px 15px 30px;
         margin: 0;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* Изменено с center на flex-start */
+        justify-content: flex-start;
         align-items: center;
-        
     }
 
+    /* Контейнер для кнопок управления */
+    #top-left-controls {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px; 
+    }
+
+    #languageButton, #homeButton {
+        font-family: 'Montserrat', sans-serif;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 8px 16px;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        white-space: nowrap; /* Предотвращает перенос текста */
+        height: 36px; /* Фиксированная высота */
+    }
+
+    #homeButton {
+        margin-left: 60px;
+        margin-top: -9px;
+    }
+
+    #homeButton:hover, #languageButton:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    /* Стили для карточек персонажей */
     .grid-container {
         gap: 20px;
-        padding-top: 20px; /* Дополнительный отступ */
+        padding-top: 20px;
     }
 
     .character-card {
@@ -53,35 +93,7 @@
         font-size: 0.7rem;
     }
 
-    /* Кнопка "На главную" */
-    #homeButton {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        z-index: 1000;
-        font-family: 'Montserrat', sans-serif;
-        border: none;
-        cursor: pointer;
-        font-size: 0.9rem;
-        color: white;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 8px 12px;
-        border-radius: 20px;
-        backdrop-filter: blur(5px);
-        transition: all 0.3s ease;
-        font-weight: bold;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-    }
-
-    #homeButton:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: scale(1.05);
-    }
-
-    /* Остальные существующие стили для мобильной версии */
+    /* Остальные стили */
     .container {
         width: 100%;
         max-width: 100%;
@@ -118,84 +130,11 @@
         -webkit-user-drag: none;
     }
 
-    .container #newCharacterButton {
-        font-size: 1.8rem;
-        margin-top: 0px;
-        padding: 8px 16px;
+    #modalCharQuote {
+        margin-top: 80px;
     }
 
-    .character-card-inner {
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    #info-wrapper {
-        padding: 0;
-        width: 100%;
-        align-items: center;
-        gap: 20px;
-    }
-
-    #character-name {
-        font-size: 2rem;
-        text-align: center;
-        margin-bottom: 15px;
-        line-height: 1.2;
-        word-wrap: break-word;
-    }
-
-    #faction-info {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-        gap: 10px;
-    }
-
-    #faction-image {
-        width: 50px;
-        height: 50px;
-        margin: 0;
-    }
-
-    #faction-name {
-        font-size: 1rem;
-        text-align: center;
-        line-height: 1.4;
-    }
-
-    #newCharacterButton {
-        font-size: 1.3rem;
-        padding: 10px 20px;
-        margin-top: 20px;
-        text-align: center;
-        width: auto;
-        border-radius: 25px;
-        backdrop-filter: blur(5px);
-    }
-
-    #newCharacterButton.stop-pulse {
-        font-size: 1.2rem;
-    }
-
-    #newCharacterButton::after {
-        display: none;
-    }
-
-    #top-left-controls {
-        top: 10px;
-        left: 10px;
-        gap: 8px;
-    }
-
-    #languageButton, #allCharactersButton, #TelegramButton {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-    }
-
-    #TelegramButton {
-        width: 20px;
-        height: 20px;
-        padding: 0;
-    }
+    /* Удалены все дублирующиеся стили для кнопок */
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -204,11 +143,6 @@
         height: 35vw;
         max-width: 250px;
         max-height: 250px;
-    }
-
-    .container #newCharacterButton {
-        font-size: 2rem;
-        margin-top: 15px;
     }
 }
 
@@ -244,146 +178,18 @@
     }
 }
 
-@media (max-width: 768px) {
-    .character-card:hover .card-faction-info span:only-child {
-        color: #ffc2c2;
-        font-weight: 600;
-    }
-}
-
-/* Адаптивные стили для кнопки "На главную" */
-@media (max-width: 768px) {
-    #homeButton {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-        top: 10px;
-        left: 10px;
-    }
-}
-
-/* Адаптивность для карточек */
-@media (max-width: 768px) {
-    .grid-container {
-        gap: 20px;
-    }
-    
-    .character-card {
-        width: 160px;
-        padding: 20px;
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-
-    .character-card.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    .character-card img.char-image {
-        width: 100px;
-        height: 100px;
-        border-width: 3px;
-    }
-
-    .character-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-    
-    .card-faction-info {
-        flex-direction: column;
-        gap: 5px;
-        padding: 6px;
-    }
-    
-    .card-faction-info span {
-        font-size: 0.7rem;
-    }
-
-    /* Делаем кнопку "Подробнее" видимой на мобильных устройствах */
-    .details-button {
-        margin-top: 15px;
-        padding: 8px 15px;
-        font-size: 0.8rem;
-        width: auto;
-        display: inline-block;
-    }
-
-    .character-card:hover .details-button {
-        transform: scale(1.05);
-    }
-
-    .character-card:hover .card-faction-info {
-        opacity: 1;
-        transform: none;
-    }
-}
-
+/* Остальные медиа-запросы */
 @media (max-width: 768px) {
     body {
         padding: 70px 10px 30px;
     }
-    .grid-container {
-        gap: 20px;
-    }
-    #homeButton {
-        font-size: 14px;
-        padding: 8px 16px;
-        top: 15px;
-        left: 15px;
-    }
+    
     .modal-content {
         max-height: 85vh;
     }
+    
     .modal-text-content {
         padding: 25px 20px;
         text-align: center;
-    }
-    #modalCharName {
-        font-size: 2rem;
-    }
-    .modal-faction-info {
-        justify-content: center;
-    }
-    .modal-char-details {
-        text-align: left;
-    }
-    #modalCharDescription {
-        padding-bottom: 20px;
-    }
-    .modal-quote-container {
-        position: relative;
-        bottom: auto;
-        right: auto;
-        max-width: 100%;
-        text-align: center;
-        margin-top: 20px;
-        padding: 0 10px;
-    }
-    #modalCharQuote {
-        padding-right: 0;
-        display: inline-block;
-        text-align: left;
-    }
-    #modalCharQuote::after {
-        display: none;
-    }
-}
-
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes card-appear {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
     }
 }

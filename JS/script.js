@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const arr = Object.keys(characters);
     const newCharacterButton = document.getElementById('newCharacterButton'); // Изначальная кнопка
+    let lastCharacter = null; // Переменная для хранения последнего выбранного персонажа
 
     function createCharacterContainer() {
         const container = document.createElement('div');
@@ -154,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(characterWrapper);
 
         document.body.appendChild(container);
-        // Важно: не удаляем старую кнопку сразу. Она будет скрыта.
 
         cardInner.addEventListener('click', () => {
             cardInner.classList.toggle('is-flipped');
@@ -165,14 +165,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper, containerElement) {
         // Убираем класс анимации перед сменой контента, чтобы его можно было добавить снова
-        // Это сбросит анимацию и позволит ей запуститься заново
         if (containerElement && containerElement.classList.contains('animate-in')) {
             containerElement.classList.remove('animate-in');
             // Принудительная перерисовка, чтобы браузер осознал удаление класса
             void containerElement.offsetWidth;
         }
 
-        const randomItem = arr[Math.floor(Math.random() * arr.length)];
+        let randomItem;
+        let availableCharacters = [...arr]; // Создаем копию массива всех персонажей
+
+        // Если предыдущий персонаж был, удаляем его из доступных для выбора
+        if (lastCharacter && availableCharacters.length > 1) { // Проверяем, что есть еще персонажи для выбора
+            const lastCharacterIndex = availableCharacters.indexOf(lastCharacter);
+            if (lastCharacterIndex > -1) {
+                availableCharacters.splice(lastCharacterIndex, 1);
+            }
+        }
+
+        // Выбираем случайного персонажа из доступных
+        randomItem = availableCharacters[Math.floor(Math.random() * availableCharacters.length)];
+        lastCharacter = randomItem; // Обновляем последний выбранный персонаж
+
         const characterData = characters[randomItem];
 
         if (characterData) {
@@ -215,11 +228,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Добавляем класс анимации снова после обновления контента
         if (containerElement) {
             containerElement.classList.add('animate-in');
         }
     }
 
+    // Обработчик для первой кнопки "Выбрать агента"
     newCharacterButton.addEventListener('click', () => {
         newCharacterButton.style.display = 'none'; // Скрываем первую кнопку
 

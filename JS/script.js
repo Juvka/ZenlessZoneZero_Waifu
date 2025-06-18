@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const allCharactersButton = document.getElementById('allCharactersButton');
         if (allCharactersButton) {
-        allCharactersButton.textContent = translations[currentLanguage]['allCharactersButton'];
+            allCharactersButton.textContent = translations[currentLanguage]['allCharactersButton'];
         }
 
         const factionNames = document.querySelectorAll('#faction-name');
@@ -65,11 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalName = el.dataset.originalName;
             if (originalName) {
                 if (currentLanguage === 'en') {
-                    el.textContent = translations['ru']['factions'][originalName] || originalName;
+                    const englishName = Object.keys(translations['en']['factions']).find(key => translations['ru']['factions'][key] === originalName);
+                    el.textContent = englishName || originalName;
                 } else {
                     el.textContent = originalName;
                 }
-            } else if (el.textContent === 'Нет фракции' || el.textContent === 'No faction') {
+            } else if (el.textContent === translations['ru']['noFaction'] || el.textContent === translations['en']['noFaction']) {
                 el.textContent = translations[currentLanguage]['noFaction'];
             }
         });
@@ -99,11 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const arr = Object.keys(characters);
-    const newCharacterButton = document.getElementById('newCharacterButton');
+    const newCharacterButton = document.getElementById('newCharacterButton'); // Изначальная кнопка
 
     function createCharacterContainer() {
         const container = document.createElement('div');
-        container.className = 'container';
+        container.className = 'container'; // Изначально без анимационного класса
 
         const characterWrapper = document.createElement('div');
         characterWrapper.id = 'character-wrapper';
@@ -141,8 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
         characterName.id = 'character-name';
 
         const buttonWrapper = document.createElement('span');
-        const newButton = document.createElement('button');
-        newButton.id = 'newCharacterButton';
+        const newButton = document.createElement('button'); // Новая кнопка "Выбрать другую"
+        newButton.id = 'newCharacterButton'; // Даем ей тот же ID, чтобы CSS стили применялись
         newButton.textContent = translations[currentLanguage]['chooseAnother'];
 
         infoWrapper.appendChild(characterName);
@@ -153,25 +154,30 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(characterWrapper);
 
         document.body.appendChild(container);
-        newCharacterButton.remove();
+        // Важно: не удаляем старую кнопку сразу. Она будет скрыта.
 
         cardInner.addEventListener('click', () => {
             cardInner.classList.toggle('is-flipped');
         });
 
-        return { imgElementFront, imgElementBack, characterName, newButton, infoWrapper, cardInner };
+        return { container, imgElementFront, imgElementBack, characterName, newButton, infoWrapper, cardInner };
     }
 
-    function displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper) {
-        // Выбираем одного случайного персонажа
+    function displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper, containerElement) {
+        // Убираем класс анимации перед сменой контента, чтобы его можно было добавить снова
+        // Это сбросит анимацию и позволит ей запуститься заново
+        if (containerElement && containerElement.classList.contains('animate-in')) {
+            containerElement.classList.remove('animate-in');
+            // Принудительная перерисовка, чтобы браузер осознал удаление класса
+            void containerElement.offsetWidth;
+        }
+
         const randomItem = arr[Math.floor(Math.random() * arr.length)];
         const characterData = characters[randomItem];
 
         if (characterData) {
-            // Устанавливаем лицевое и оборотное изображение
             imgElementFront.src = characterData.image;
             imgElementBack.src = characterData.back_image;
-            
             characterName.textContent = randomItem;
 
             const factionInfo = document.getElementById('faction-info');
@@ -189,44 +195,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 const factionName = document.createElement('span');
                 factionName.id = 'faction-name';
                 factionName.dataset.originalName = characterData.faction.name;
-                factionName.textContent = currentLanguage === 'ru' 
-                    ? characterData.faction.name 
+                factionName.textContent = currentLanguage === 'ru'
+                    ? characterData.faction.name
                     : (translations['ru']['factions'][characterData.faction.name] || characterData.faction.name);
 
                 newFactionInfo.appendChild(factionImage);
-                newFactionInfo.appendChild(factionName);   
+                newFactionInfo.appendChild(factionName);
                 infoWrapper.insertBefore(newFactionInfo, infoWrapper.lastChild);
             } else {
                 const newFactionInfo = document.createElement('div');
                 newFactionInfo.id = 'faction-info';
-                
+
                 const factionName = document.createElement('span');
                 factionName.id = 'faction-name';
                 factionName.textContent = translations[currentLanguage]['noFaction'];
-                
+
                 newFactionInfo.appendChild(factionName);
                 infoWrapper.insertBefore(newFactionInfo, infoWrapper.lastChild);
             }
         }
+
+        if (containerElement) {
+            containerElement.classList.add('animate-in');
+        }
     }
 
     newCharacterButton.addEventListener('click', () => {
-        newCharacterButton.classList.add('stop-pulse');
-        const { imgElementFront, imgElementBack, characterName, newButton, infoWrapper, cardInner } = createCharacterContainer();
-        displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper);
+        newCharacterButton.style.display = 'none'; // Скрываем первую кнопку
 
+        const { container, imgElementFront, imgElementBack, characterName, newButton, infoWrapper, cardInner } = createCharacterContainer();
+        displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper, container); // Передаем контейнер
+
+        // Обработчик для новой кнопки "Выбрать другую"
         newButton.addEventListener('click', () => {
-            newButton.textContent = translations[currentLanguage]['chooseAnother'];
-
-            const displayNew = () => {
-                displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper);
-            }
-
+            // Если карточка перевернута, сначала вернем ее
             if (cardInner.classList.contains('is-flipped')) {
                 cardInner.classList.remove('is-flipped');
-                setTimeout(displayNew, 600);
+                setTimeout(() => {
+                    displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper, container); // Передаем контейнер
+                }, 600); // Дождемся завершения анимации переворота
             } else {
-                displayNew();
+                displayRandomCharacter(imgElementFront, imgElementBack, characterName, infoWrapper, container); // Передаем контейнер
             }
         });
     });

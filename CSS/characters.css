@@ -26,6 +26,46 @@ body {
     color: #ffffff;
 } 
 
+/* НОВЫЙ БЛОК ДЛЯ КОНТЕЙНЕРА КНОПОК */
+#top-left-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Расстояние между кнопками */
+}
+
+/* ИЗМЕНЕННЫЙ БЛОК: ОБЪЕДИНЕНЫ СТИЛИ ДЛЯ ОБЕИХ КНОПОК И УБРАНО position:fixed */
+#homeButton, #languageButton {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem; /* Немного увеличил для лучшей читаемости */
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 13px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    user-select: none;
+}
+
+#homeButton {
+    margin-left: 100px;
+}
+
+#homeButton:hover, #languageButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
 .grid-container {
     display: flex;
     flex-wrap: wrap;
@@ -167,7 +207,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 22px;
     color: white;
     background: rgba(255, 255, 255, 0.1);
     padding: 10px 20px;
@@ -270,7 +310,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;
+    object-position: center ;
 }
 
 .modal-scrollable-content {

@@ -105,6 +105,10 @@ body {
     padding-bottom: 10px; /* Уменьшаем отступ */
 }
 
+#modalCharDescription {
+    padding-bottom: 15px;
+}
+
 .modal-quote-container {
     position: static; /* Цитата становится частью потока */
     max-width: 100%;

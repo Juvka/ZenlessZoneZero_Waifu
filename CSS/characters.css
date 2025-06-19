@@ -20,13 +20,10 @@ body {
     padding: 80px 20px 40px;
     font-family: 'Montserrat', sans-serif;
     position: relative;
-    animation: gradient 15s ease infinite;
-    background: linear-gradient(45deg, var(--bg-gradient-start), var(--bg-gradient-mid1), var(--bg-gradient-mid2), var(--bg-gradient-end));
-    background-size: 400% 400%;
+    background: rgb(32, 0, 0);
     color: #ffffff;
 } 
 
-/* НОВЫЙ БЛОК ДЛЯ КОНТЕЙНЕРА КНОПОК */
 #top-left-controls {
     position: fixed;
     top: 20px;
@@ -34,7 +31,7 @@ body {
     z-index: 1000;
     display: flex;
     align-items: center;
-    gap: 15px; /* Расстояние между кнопками */
+    gap: 15px; 
 }
 
 /* ИЗМЕНЕННЫЙ БЛОК: ОБЪЕДИНЕНЫ СТИЛИ ДЛЯ ОБЕИХ КНОПОК И УБРАНО position:fixed */

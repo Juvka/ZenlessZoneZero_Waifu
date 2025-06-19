@@ -1,0 +1,249 @@
+@media (max-width: 768px) {
+body {
+    padding: 70px 15px 20px; /* Увеличил отступ сверху для кнопок */
+}
+
+/* Кнопки в шапке */
+#top-left-controls {
+    top: 15px;
+    left: 15px;
+    gap: 12px;
+}
+
+#homeButton, #languageButton {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 23px 18px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    height: 36px;
+}
+
+/* Сетка карточек */
+.grid-container {
+    gap: 15px;
+}
+
+/* Карточка персонажа */
+.character-card {
+    width: 100%; /* На очень маленьких экранах карточка занимает всю ширину */
+    max-width: 300px; /* Но не становится слишком большой */
+    padding: 20px;
+}
+
+.character-card .char-image {
+    width: 150px;
+    height: 150px;
+}
+
+.character-card .card-title {
+    font-size: 1.3rem;
+}
+
+/* Модальное окно */
+.modal-overlay {
+    padding: 10px;
+}
+
+.modal-content {
+    max-height: 95vh;
+}
+
+.modal-image-container {
+    height: 30vh; /* Уменьшаем высоту картинки на мобильных */
+}
+
+.modal-text-content {
+    padding: 20px;
+}
+
+.modal-title {
+    font-size: 2rem; /* Уменьшаем заголовок */
+}
+
+.modal-char-details {
+    grid-template-columns: 1fr; /* Все детали в один столбец */
+    gap: 10px;
+}
+
+/* Новые классы для деталей в модальном окне */
+.modal-char-rank,
+.modal-char-height,
+.modal-char-birthdate {
+    background: rgba(0,0,0,0.2);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 0;
+    font-size: .9rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-char-rank strong,
+.modal-char-height strong,
+.modal-char-birthdate strong {
+    color: var(--accent-color);
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+.modal-char-details span {
+    color: #ddd;
+}
+
+.modal-description {
+    font-size: 0.95rem;
+    padding-bottom: 10px; /* Уменьшаем отступ */
+}
+
+.modal-quote-container {
+    position: static; /* Цитата становится частью потока */
+    max-width: 100%;
+    text-align: right;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.modal-quote {
+    padding-right: 0;
+    font-size: 0.9rem;
+}
+
+.modal-quote::after {
+    display: none; /* Убираем боковую линию у цитаты на мобильных */
+}
+}
+
+/* --- Планшеты (Portrait, 768px и выше) --- */
+@media (min-width: 768px) {
+    body {
+        padding: 80px 40px 40px;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 25px;
+    }
+
+    .character-card {
+        max-width: none; /* Убираем ограничение ширины */
+    }
+    
+    .modal-content {
+        max-width: 650px;
+        flex-direction: column; /* Остается вертикальным */
+    }
+
+    .modal-image-container {
+        height: 40vh;
+    }
+    
+    .modal-title {
+        font-size: 2.8rem;
+    }
+
+    .modal-char-details {
+        grid-template-columns: repeat(2, 1fr); /* Две колонки */
+    }
+    
+    .modal-description {
+        padding-bottom: 20px; /* Возвращаем отступ для цитаты */
+    }
+    
+    .modal-quote-container {
+        position: absolute; /* Возвращаем позиционирование */
+        right: 40px;
+        bottom: 30px;
+        max-width: 50%;
+        text-align: right;
+        margin-top: 0;
+    }
+    
+    .modal-quote {
+        padding-right: 25px;
+    }
+
+    .modal-quote::after {
+        display: block; /* Возвращаем линию */
+    }
+}
+
+/* --- Небольшие десктопы и большие планшеты (Landscape, 1024px и выше) --- */
+@media (min-width: 1024px) {
+    #homeButton, #languageButton {
+        font-size: 1.8rem;
+        padding: 13px 30px;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 30px;
+    }
+    
+    .modal-content {
+        max-width: 800px;
+    }
+
+    .modal-title {
+        font-size: 3.5rem;
+    }
+
+    .modal-char-details {
+        /* Можно сделать 3 колонки, если нужно */
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+/* --- Большие десктопы (1440px и выше) --- */
+@media (min-width: 1440px) {
+    .grid-container {
+        max-width: 1600px; /* Ограничиваем ширину сетки на очень больших экранах */
+    }
+}
+
+/* --- Специальные стили для горизонтальной ориентации на мобильных --- */
+@media (max-height: 500px) and (orientation: landscape) {
+    .modal-content {
+        flex-direction: row; /* Картинка слева, текст справа */
+        max-height: 95vh;
+    }
+    .modal-image-container {
+        width: 40%;
+        height: auto;
+        flex-shrink: 0;
+        -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%);
+        mask-image: linear-gradient(to right, black 75%, transparent 100%);
+    }
+    .modal-scrollable-content {
+        margin-top: 0;
+        width: 60%;
+    }
+    .modal-text-content {
+        padding: 30px;
+    }
+    .modal-title {
+        font-size: 2rem;
+    }
+    .modal-char-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 400px) {
+    #homeButton, #languageButton {
+        padding: 10px 15px;
+        font-size: 1.2rem; 
+        display: flex;
+        position: relative;
+        left: 22%;
+    }
+}

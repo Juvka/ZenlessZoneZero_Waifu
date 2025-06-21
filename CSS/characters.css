@@ -52,7 +52,12 @@ body {
     display: flex;
     align-items: center;
     white-space: nowrap; 
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+    outline: none;
 }
 
 #homeButton:hover, #languageButton:hover {
@@ -187,6 +192,13 @@ body {
     position: relative;
     z-index: 2;
     cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
 }
 
 .details-button:hover {

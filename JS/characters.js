@@ -1,15 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Полный словарь переводов, включая рост и дату рождения
+    // Полный словарь переводов
     const translations = {
         'ru': {
             'pageTitle': 'Все персонажи - Zenless Zone Zero',
             'homeButton': 'На главную',
             'detailsButton': 'Подробнее',
             'noFaction': 'Нет фракции',
+            'selectFaction': 'Выбрать фракцию',
+            'allFactions': 'Все фракции',
             'rankLabel': 'Ранг:',
             'heightLabel': 'Рост:',
             'birthdateLabel': 'Дата рождения:',
             'languageButton': 'EN',
+            'searchPlaceholder': 'Поиск персонажа...',
             'characters': {
                 'character-1': { name: 'Jane Doe', factionName: '«Группа особого реагирования угрозыска»', height: '170 см', birthdate: '16 Февраля', description: 'Кто я? Чистокровная кошка-тирен! Ах, такое редкое происхождение когда-то доставляло мне немало хлопот. Ну зачем же мне врать? Мяу!', quote: 'Ой, ну это было тогда! Сейчас-то я точно говорю правду! Честно-честно!' },
                 'character-2': { name: 'Nicole Demara', factionName: '«Хитрые зайцы»', height: '165 см', birthdate: '11 Ноября', description: 'Глава агентства мастеров на все руки «Хитрые зайцы»...несмотря на её любовь к денни, Николь удивительно бездарна в области управления финансами, из-за чего «Хитрые зайцы» вечно оказываются в долгах.', quote: 'Мудрый выбор! Но сразу предупреждаю: мои услуги стоят недешёво!' },
@@ -35,10 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
             'homeButton': 'To main',
             'detailsButton': 'Details',
             'noFaction': 'No Faction',
+            'selectFaction': 'Select Faction',
+            'allFactions': 'All Factions',
             'rankLabel': 'Rank:',
             'heightLabel': 'Height:',
             'birthdateLabel': 'Birthdate:',
             'languageButton': 'RU',
+            'searchPlaceholder': 'Search character...',
             'characters': {
                 'character-1': { name: 'Jane Doe', factionName: 'Criminal Investigation Special Response Team', height: '170 cm', birthdate: 'February 16', description: "Who am I? A purebred cat-thiren! Ah, such a rare origin once caused me a lot of trouble. Why should I lie? Meow!", quote: "Oh, well that was then! Now I'm telling the truth! For real!" },
                 'character-2': { name: 'Nicole Demara', factionName: 'Cunning Hares', height: '165 cm', birthdate: 'November 11', description: 'The head of the "Cunning Hares" jack-of-all-trades agency... Despite her love for denni, Nicole is surprisingly talentless in financial management, which is why the "Cunning Hares" are constantly in debt.', quote: 'A wise choice! But I must warn you: my services are not cheap!' },
@@ -61,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // Структура с данными, не зависящими от языка (пути к файлам, ранг)
+    // Структура с данными персонажей
     const characters = {
         'character-1': { image: 'images/JaneDoe.webp', back_image: 'images/mental/JaneDoe.webp', faction: { image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' }, rank: 'S' },
         'character-2': { image: 'images/NicoleDemara.webp', back_image: 'images/mental/NicoleDemara.webp', faction: { image: 'images/factions/CunningHares.webp' }, rank: 'A' },
@@ -76,28 +82,288 @@ document.addEventListener('DOMContentLoaded', () => {
         'character-11': { image: 'images/AstraYao.webp', back_image: 'images/mental/AstraYao.webp', faction: { image: 'images/factions/StarsofLyra.webp' }, rank: 'S' },
         'character-12': { image: 'images/Belle.webp', back_image: 'images/backImages/Belle.webp', faction: null, rank: '???' },
         'character-13': { image: 'images/Soldier0Anby.webp', back_image: 'images/mental/Soldier0Anby.webp', faction: { image: 'images/factions/Obol.webp' }, rank: 'S' },
-        'character-14': { image: 'images/Pulchra.webp' , back_image: 'images/mental/Pulchra.webp', faction: { image: 'images/factions/SonsofCalydon.webp' }, rank: 'A' },
+        'character-14': { image: 'images/Pulchra.webp', back_image: 'images/mental/Pulchra.webp', faction: { image: 'images/factions/SonsofCalydon.webp' }, rank: 'A' },
         'character-15': { image: 'images/Trigger.webp', back_image: 'images/mental/Trigger.webp', faction: { image: 'images/factions/Obol.webp' }, rank: 'S' },
         'character-16': { image: 'images/Vivian.webp', back_image: 'images/mental/Vivian.webp', faction: { image: 'images/factions/Mockingbird.webp' }, rank: 'S' },
         'character-17': { image: 'images/Yixuan.webp', back_image: 'images/mental/YixuanCinema.webp', faction: { image: 'images/factions/YunkuiSummit.webp' }, rank: 'S' }
     };
-    
+
+    // Список всех фракций
+    const factions = {
+        'all': { name: { 'ru': 'Все фракции', 'en': 'All Factions' }, image: '' },
+        'CriminalInvestigationSpecialResponseTeam': { name: { 'ru': '«Группа особого реагирования угрозыска»', 'en': 'Criminal Investigation Special Response Team' }, image: 'images/factions/CriminalInvestigationSpecialResponseTeam.webp' },
+        'CunningHares': { name: { 'ru': '«Хитрые зайцы»', 'en': 'Cunning Hares' }, image: 'images/factions/CunningHares.webp' },
+        'SonsofCalydon': { name: { 'ru': '«Сыны Калидона»', 'en': 'Sons of Calydon' }, image: 'images/factions/SonsofCalydon.webp' },
+        'Section6': { name: { 'ru': '«Секция 6»', 'en': 'Section 6' }, image: 'images/factions/Section6.webp' },
+        'Belobog': { name: { 'ru': '«Белобог»', 'en': 'Belobog' }, image: 'images/factions/Belobog.webp' },
+        'VictoriaHousekeeping': { name: { 'ru': '«Агентство домашнего персонала Виктория»', 'en': 'Victoria Housekeeping' }, image: 'images/factions/VictoriaHousekeeping.webp' },
+        'StarsofLyra': { name: { 'ru': '«Созвездие Лиры»', 'en': 'Stars of Lyra' }, image: 'images/factions/StarsofLyra.webp' },
+        'Obol': { name: { 'ru': '«Отряд Обол»', 'en': 'Obol Squad' }, image: 'images/factions/Obol.webp' },
+        'Mockingbird': { name: { 'ru': '«Пересмешники»', 'en': 'Mockingbirds' }, image: 'images/factions/Mockingbird.webp' },
+        'YunkuiSummit': { name: { 'ru': '«Школа горы Юнькуй»', 'en': 'Yunkui Summit School' }, image: 'images/factions/YunkuiSummit.webp' },
+        'none': { name: { 'ru': 'Без фракции', 'en': 'No Faction' }, image: '' }
+    };
+
     let currentLanguage = localStorage.getItem('language') || 'ru';
     let currentCharacterContext = { id: null };
+    let currentFactionFilter = 'all';
+    let currentSearchQuery = '';
 
     const container = document.querySelector('.grid-container');
     const modal = document.getElementById('characterModal');
     const languageButton = document.getElementById('languageButton');
     
-    // --- ФУНКЦИИ ПЕРЕВОДА ---
+    // Инициализация приложения
+    function init() {
+        createFilterControls();
+        renderCharacterCards();
+        setupEventListeners();
+    }
+
+    // Создание элементов управления фильтрами
+    function createFilterControls() {
+        const controlsContainer = document.getElementById('top-left-controls');
+        
+        // Создаем контейнер для левой части (поиск будет слева)
+        const controlsLeft = document.createElement('div');
+        controlsLeft.className = 'controls-left';
+        
+        // Переносим существующие кнопки в новый контейнер
+        const languageButton = document.getElementById('languageButton');
+        const homeButton = document.getElementById('homeButton');
+        
+        // Добавляем кнопки в правильном порядке
+        controlsLeft.appendChild(languageButton);
+        controlsLeft.appendChild(homeButton);
+        
+        // Добавляем поисковую строку (теперь она будет слева)
+        const searchField = createSearchField();
+        controlsLeft.appendChild(searchField);
+        
+        // Вставляем левую часть в начало контейнера
+        controlsContainer.insertBefore(controlsLeft, controlsContainer.firstChild);
+        
+        // Фильтр фракций (теперь он будет справа)
+        const factionFilter = createFactionFilter();
+        controlsContainer.appendChild(factionFilter);
+    }
+
+    // Создание фильтра фракций
+    function createFactionFilter() {
+        const filterContainer = document.createElement('div');
+        filterContainer.className = 'faction-filter-container';
+        
+        const filterButton = document.createElement('button');
+        filterButton.className = 'faction-filter-button';
+        filterButton.innerHTML = `
+            <span class="faction-filter-text">${translations[currentLanguage].selectFaction}</span>
+            <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        `;
+        
+        const dropdown = document.createElement('div');
+        dropdown.className = 'faction-dropdown';
+        
+        // Функция для обновления вариантов фракций
+        function updateFactionOptions() {
+            dropdown.innerHTML = ''; // Очищаем текущие варианты
+            
+            // Добавление вариантов фракций с актуальным переводом
+            Object.entries(factions).forEach(([id, data]) => {
+                const option = document.createElement('div');
+                option.className = 'faction-option';
+                option.dataset.factionId = id;
+                
+                if (id !== 'all' && id !== 'none' && data.image) {
+                    option.innerHTML = `
+                        <img src="${data.image}" alt="${data.name[currentLanguage]}" class="faction-option-icon">
+                        <span>${data.name[currentLanguage]}</span>
+                    `;
+                } else {
+                    option.innerHTML = `<span>${data.name[currentLanguage]}</span>`;
+                }
+                
+                option.addEventListener('click', () => {
+                    currentFactionFilter = id;
+                    updateFactionButton(filterButton, id, data);
+                    dropdown.style.display = 'none';
+                    renderCharacterCards();
+                });
+                
+                dropdown.appendChild(option);
+            });
+        }
+        
+        // Инициализация вариантов
+        updateFactionOptions();
+        
+        filterButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'none' ? 'flex' : 'none';
+        });
+        
+        filterContainer.appendChild(filterButton);
+        filterContainer.appendChild(dropdown);
+        
+        // Закрытие при клике вне элемента
+        document.addEventListener('click', (e) => {
+            if (!filterContainer.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+        
+        // Обновляем варианты при смене языка
+        languageButton.addEventListener('click', () => {
+            updateFactionOptions();
+        });
+        
+        return filterContainer;
+    }
+
+    // Обновление кнопки фильтра
+    function updateFactionButton(button, factionId, factionData) {
+        if (factionId === 'all') {
+            button.innerHTML = `
+                <span class="faction-filter-text">${translations[currentLanguage].selectFaction}</span>
+                <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                    <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            `;
+        } else {
+            button.innerHTML = `
+                ${factionData.image ? `<img src="${factionData.image}" alt="${factionData.name[currentLanguage]}" class="faction-button-icon">` : ''}
+                <span class="faction-filter-text">${factionData.name[currentLanguage]}</span>
+                <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                    <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            `;
+        }
+    }
+
+    // Создание поля поиска
+    function createSearchField() {
+        const searchContainer = document.createElement('div');
+        searchContainer.className = 'search-container';
+        
+        // Заменяем SVG на изображение
+        const searchIcon = document.createElement('img'); // Изменяем с div на img
+        searchIcon.className = 'search-icon';
+        searchIcon.src = 'images/Agents.webp'; // Укажите путь к вашему изображению
+        searchIcon.alt = 'Search'; // Добавляем alt для доступности
+        
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.className = 'search-input';
+        searchInput.placeholder = translations[currentLanguage].searchPlaceholder;
+        
+        searchInput.addEventListener('input', (e) => {
+            currentSearchQuery = e.target.value.toLowerCase();
+            renderCharacterCards();
+        });
+        
+        searchContainer.appendChild(searchIcon);
+        searchContainer.appendChild(searchInput);
+        
+        return searchContainer;
+    }
+
+    // Фильтрация персонажей
+    function filterCharacters() {
+        return Object.entries(characters).filter(([id, data]) => {
+            // Проверка фракции
+            const factionMatch = 
+                currentFactionFilter === 'all' || 
+                (currentFactionFilter === 'none' && !data.faction) ||
+                (data.faction && currentFactionFilter === data.faction.image.split('/').pop().split('.')[0]);
+            
+            // Проверка поиска
+            const searchMatch = 
+                currentSearchQuery === '' || 
+                translations[currentLanguage].characters[id].name.toLowerCase().includes(currentSearchQuery);
+            
+            return factionMatch && searchMatch;
+        });
+    }
+
+    // Отрисовка карточек персонажей
+    function renderCharacterCards() {
+        container.innerHTML = '';
+        const filteredCharacters = filterCharacters();
+        
+        filteredCharacters.forEach(([id, data]) => {
+            const card = createCharacterCard(id, data);
+            container.appendChild(card);
+        });
+        
+        translatePage();
+    }
+
+    // Создание карточки персонажа
+    function createCharacterCard(id, data) {
+        const card = document.createElement('div');
+        card.className = 'character-card';
+        card.dataset.characterId = id;
+        
+        const img = document.createElement('img');
+        img.src = data.image.trim();
+        img.className = 'char-image';
+        card.appendChild(img);
+        
+        const name = document.createElement('h3');
+        card.appendChild(name);
+        
+        const factionInfo = document.createElement('div');
+        factionInfo.className = 'card-faction-info';
+        
+        if (data.faction) {
+            const factionImg = document.createElement('img');
+            factionImg.src = data.faction.image.trim();
+            factionInfo.appendChild(factionImg);
+            const factionName = document.createElement('span');
+            factionInfo.appendChild(factionName);
+        } else {
+            const noFactionName = document.createElement('span');
+            factionInfo.appendChild(noFactionName);
+        }
+        card.appendChild(factionInfo);
+        
+        const detailsButton = document.createElement('button');
+        detailsButton.className = 'details-button';
+        card.appendChild(detailsButton);
+        
+        return card;
+    }
+
+    // Перевод страницы
     function translatePage() {
         const lang = currentLanguage;
         const trans = translations[lang];
-
+        
         document.title = trans.pageTitle;
-        languageButton.textContent = trans.languageButton;
         document.getElementById('homeButton').textContent = trans.homeButton;
-
+        languageButton.textContent = trans.languageButton;
+        
+        // Обновление фильтра фракций
+        const filterButton = document.querySelector('.faction-filter-button');
+        if (filterButton) {
+            if (currentFactionFilter === 'all') {
+                filterButton.querySelector('.faction-filter-text').textContent = trans.selectFaction;
+            } else {
+                const factionData = factions[currentFactionFilter];
+                if (factionData) {
+                    filterButton.querySelector('.faction-filter-text').textContent = factionData.name[lang];
+                }
+            }
+        }
+        
+        // Обновление поиска
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) {
+            searchInput.placeholder = trans.searchPlaceholder;
+        }
+        
+        // Обновление карточек персонажей
         document.querySelectorAll('.character-card').forEach(card => {
             const charId = card.dataset.characterId;
             if (charId && trans.characters[charId]) {
@@ -112,35 +378,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-
+        
+        // Обновление модального окна, если открыто
         if (modal.classList.contains('active') && currentCharacterContext.id) {
             translateModal(currentCharacterContext.id);
         }
     }
 
+    // Перевод модального окна
     function translateModal(characterId) {
         const lang = currentLanguage;
         const trans = translations[lang];
         const charTrans = trans.characters[characterId];
         const charData = characters[characterId];
-
+        
         if (!charTrans || !charData) return;
-
-        // Перевод основного текста
+        
         document.getElementById('modalCharName').textContent = charTrans.name;
         document.getElementById('modalCharDescription').textContent = charTrans.description;
         document.getElementById('modalCharQuote').textContent = charTrans.quote ? `“${charTrans.quote}”` : '';
         
-        // Перевод надписей и динамических полей (рост, дата рождения)
         const details = document.querySelector('.modal-char-details');
         details.querySelector('p:nth-child(1) strong').textContent = trans.rankLabel;
         details.querySelector('p:nth-child(2) strong').textContent = trans.heightLabel;
         details.querySelector('p:nth-child(3) strong').textContent = trans.birthdateLabel;
-
+        
         document.getElementById('modal-char-height').textContent = charTrans.height || '???';
         document.getElementById('modal-char-birthdate').textContent = charTrans.birthdate || '???';
-
-        // Перевод фракции
+        
         const factionContainer = document.getElementById('modalCharFaction');
         if (charData.faction) {
             factionContainer.querySelector('span').textContent = charTrans.factionName;
@@ -151,30 +416,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- ЛОГИКА МОДАЛЬНОГО ОКНА И КАРТОЧЕК ---
+    // Открытие модального окна
     function openModal(characterId) {
         currentCharacterContext = { id: characterId };
         const data = characters[characterId];
         const trans = translations[currentLanguage].characters[characterId];
+        
         if (!data || !trans) return;
-
+        
         modal.querySelector('.modal-scrollable-content').scrollTop = 0;
         
-        // Установка статичных данных, не зависящих от языка
         document.getElementById('modalCharImage').src = data.back_image.trim();
-        document.getElementById('modalCharImage').alt = trans.name; // alt-текст переводим сразу
+        document.getElementById('modalCharImage').alt = trans.name;
         document.getElementById('modal-char-weapon').textContent = data.rank || '???';
-
+        
         if (data.faction) {
             document.getElementById('modalFactionImage').src = data.faction.image.trim();
         }
         
         translateModal(characterId);
-
+        
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
     
+    // Закрытие модального окна
     function closeModal() {
         modal.classList.add('closing');
         modal.addEventListener('animationend', () => {
@@ -184,63 +450,76 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { once: true });
     }
 
-    Object.entries(characters).forEach(([characterId, characterData]) => {
-        const card = document.createElement('div');
-        card.className = 'character-card';
-        card.dataset.characterId = characterId;
+    // Настройка обработчиков событий
+    function setupEventListeners() {
+        languageButton.addEventListener('click', () => {
+            currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+            localStorage.setItem('language', currentLanguage);
+            translatePage();
+        });
         
-        const img = document.createElement('img');
-        img.src = characterData.image.trim();
-        img.className = 'char-image';
-        card.appendChild(img);
-
-        const name = document.createElement('h3');
-        card.appendChild(name);
-
-        const factionInfo = document.createElement('div');
-        factionInfo.className = 'card-faction-info';
-
-        if (characterData.faction) {
-            const factionImg = document.createElement('img');
-            factionImg.src = characterData.faction.image.trim();
-            factionInfo.appendChild(factionImg);
-            const factionName = document.createElement('span');
-            factionInfo.appendChild(factionName);
-        } else {
-            const noFactionName = document.createElement('span');
-            factionInfo.appendChild(noFactionName);
-        }
-        card.appendChild(factionInfo);
-        
-        const detailsButton = document.createElement('button');
-        detailsButton.className = 'details-button';
-        card.appendChild(detailsButton);
-
-        container.appendChild(card);
-    });
-
-    languageButton.addEventListener('click', () => {
-        currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
-        localStorage.setItem('language', currentLanguage);
-        translatePage();
-    });
-
-    container.addEventListener('click', (event) => {
-        const button = event.target.closest('.details-button');
-        if (button) {
-            const charId = button.closest('.character-card').dataset.characterId;
-            if (charId) {
-                openModal(charId);
+        container.addEventListener('click', (e) => {
+            const button = e.target.closest('.details-button');
+            if (button) {
+                const charId = button.closest('.character-card').dataset.characterId;
+                if (charId) openModal(charId);
             }
-        }
+        });
+        
+        modal.querySelector('.close-button').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
+    init();
+    setupMobileMenu();
+
+// Новая функция для настройки мобильного меню
+function setupMobileMenu() {
+    const menuPanel = document.getElementById('mobile-menu-panel');
+    
+    // Создаем и добавляем поиск в меню
+    const mobileSearch = createSearchField();
+    mobileSearch.classList.add('mobile-search');
+    menuPanel.appendChild(mobileSearch);
+    
+    // Создаем и добавляем фильтр фракций в меню
+    const mobileFactionFilter = createFactionFilter();
+    mobileFactionFilter.classList.add('mobile-faction-filter');
+    menuPanel.appendChild(mobileFactionFilter);
+    
+    // Настройка обработчиков для бургер-меню
+    const burgerButton = document.getElementById('burger-menu-button');
+    const closeButton = document.getElementById('close-menu-button');
+    const menuOverlay = document.getElementById('menu-overlay');
+    
+    burgerButton.addEventListener('click', () => {
+        const isExpanded = burgerButton.getAttribute('aria-expanded') === 'true';
+        burgerButton.setAttribute('aria-expanded', !isExpanded);
+        document.getElementById('mobile-menu-panel').classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        document.body.style.overflow = isExpanded ? '' : 'hidden';
     });
     
-    modal.querySelector('.close-button').addEventListener('click', closeModal);
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) closeModal();
+    closeButton.addEventListener('click', () => {
+        burgerButton.setAttribute('aria-expanded', 'false');
+        document.getElementById('mobile-menu-panel').classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
     });
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    
+    menuOverlay.addEventListener('click', () => {
+        burgerButton.setAttribute('aria-expanded', 'false');
+        document.getElementById('mobile-menu-panel').classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
     });
-    translatePage();
+}
 });

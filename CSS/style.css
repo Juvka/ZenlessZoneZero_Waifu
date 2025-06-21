@@ -154,6 +154,12 @@ body {
     animation: pulse 3s infinite;
     z-index: 10; 
     white-space: nowrap; 
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
 }
 
 .container #newCharacterButton {

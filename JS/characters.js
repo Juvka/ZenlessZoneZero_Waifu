@@ -169,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modalFactionImage').src = data.faction.image.trim();
         }
         
-        // Вызываем полный перевод модального окна
         translateModal(characterId);
 
         modal.classList.add('active');
@@ -177,12 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function closeModal() {
-        currentCharacterContext = { id: null };
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+        modal.classList.add('closing');
+        modal.addEventListener('animationend', () => {
+            modal.classList.remove('active', 'closing');
+            currentCharacterContext = { id: null };
+            document.body.style.overflow = '';
+        }, { once: true });
     }
 
-    // --- ИНИЦИАЛИЗАЦИЯ ---
     Object.entries(characters).forEach(([characterId, characterData]) => {
         const card = document.createElement('div');
         card.className = 'character-card';
@@ -241,7 +242,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
-
-    // Первоначальная загрузка и перевод страницы
     translatePage();
 });

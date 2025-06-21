@@ -1,13 +1,15 @@
 @media (max-width: 768px) {
 body {
-    padding: 70px 15px 20px; /* Увеличил отступ сверху для кнопок */
+    padding: 70px 15px 20px;
 }
 
 /* Кнопки в шапке */
 #top-left-controls {
     top: 15px;
     left: 15px;
+    right: 15px;
     gap: 12px;
+    justify-content: space-between;
 }
 
 #homeButton, #languageButton {
@@ -27,6 +29,45 @@ body {
     align-items: center;
     white-space: nowrap;
     height: 36px;
+}
+
+.static-controls {
+    display: flex;
+    gap: 12px;
+}
+
+/* Скрываем десктопные контролы */
+#dynamic-controls {
+    display: none;
+}
+
+/* Показываем кнопку бургера */
+#burger-menu-button {
+    display: flex;
+}
+
+/* Стили для элементов внутри открытой панели */
+#mobile-menu-panel .search-container,
+#mobile-menu-panel .faction-filter-container {
+    width: 100%;
+    margin-left: 0;
+}
+
+#mobile-menu-panel .search-input {
+    width: 100%;
+}
+
+#mobile-menu-panel .search-input:focus {
+    width: 100%; /* Убираем увеличение ширины при фокусе */
+}
+
+#mobile-menu-panel .faction-filter-button {
+    width: 100%;
+    justify-content: space-between;
+}
+
+#mobile-menu-panel .faction-dropdown {
+    width: 100%;
 }
 
 /* Сетка карточек */
@@ -246,5 +287,82 @@ body {
     #homeButton, #languageButton {
         padding: 10px 15px;
         font-size: 1.3rem; 
+    }
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .faction-filter-button {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .faction-dropdown {
+        width: 220px;
+    }
+    
+    .search-input {
+        width: 180px;
+        padding-left: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faction-filter-button {
+        padding: 6px 10px;
+    }
+    
+    .search-input {
+        width: 150px;
+    }
+}
+
+@media (min-width: 769px) {
+    /* Скрываем кнопку бургера на больших экранах */
+    #burger-menu-button {
+        display: none;
+    }
+}    
+
+@media (max-width: 768px) {
+    .search-container:not(.mobile-search),
+    .faction-filter-container:not(.mobile-faction-filter) {
+        display: none !important;
+    }
+    
+    #dynamic-controls {
+        display: none;
+    }
+    
+    /* Бургер-кнопка */
+    #burger-menu-button {
+        display: flex;
+        margin-left: auto;
+    }
+    
+    /* Статические кнопки (язык и домой) */
+    .static-controls {
+        display: flex;
+        gap: 10px;
+    }
+    
+    /* Основные контролы */
+    #top-left-controls {
+        justify-content: space-between;
+    }
+    
+    .controls-left {
+        flex-grow: 1;
+    }
+}
+
+/* Горизонтальная ориентация на мобильных */
+@media (max-width: 768px) and (orientation: landscape) {
+    #mobile-menu-panel {
+        width: 60%;
+    }
+    
+    .modal-content {
+        flex-direction: row;
     }
 }

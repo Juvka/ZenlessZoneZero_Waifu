@@ -12,9 +12,23 @@
 </head>
 <body>
     <div id="top-left-controls">
-        <button id="languageButton" title="Translate Page">EN</button>
-        <a href="index.html" id="homeButton">На главную</a>
+        <div class="static-controls">
+            <button id="languageButton" title="Translate Page">EN</button>
+            <a href="index.html" id="homeButton">На главную</a>
+        </div>
+        <div id="dynamic-controls">
+            </div>
+        <button id="burger-menu-button" aria-label="Открыть меню" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
+
+    <div id="mobile-menu-panel" role="dialog" aria-modal="true" aria-hidden="true">
+        <button id="close-menu-button" aria-label="Закрыть меню">&times;</button>
+        </div>
+    <div id="menu-overlay"></div>
 
     <div class="grid-container"></div>
 

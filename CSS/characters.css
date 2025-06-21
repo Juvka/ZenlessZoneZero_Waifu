@@ -24,7 +24,6 @@ body {
     color: #ffffff;
 } 
 
-/* НОВЫЙ БЛОК ДЛЯ КОНТЕЙНЕРА КНОПОК */
 #top-left-controls {
     position: fixed;
     top: 20px;
@@ -32,10 +31,9 @@ body {
     z-index: 1000;
     display: flex;
     align-items: center;
-    gap: 15px; /* Расстояние между кнопками */
+    gap: 15px; 
 }
 
-/* ИЗМЕНЕННЫЙ БЛОК: ОБЪЕДИНЕНЫ СТИЛИ ДЛЯ ОБЕИХ КНОПОК И УБРАНО position:fixed */
 #homeButton, #languageButton {
     font-family: 'Montserrat', sans-serif;
     border: none;
@@ -228,11 +226,17 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease;
     padding: 20px;
+
+    transition: opacity 0.4s ease;
 }
 
 .modal-overlay.active {
     display: flex;
     opacity: 1;
+}
+
+.modal-overlay.closing {
+    animation: fadeOut 0.9s ease forwards;
 }
 
 .modal-content {
@@ -258,6 +262,10 @@ body {
     transform: scale(1);
     opacity: 1;
     animation: slideUp 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.modal-overlay.closing .modal-content {
+    animation: slideDown 0.9s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .close-button {

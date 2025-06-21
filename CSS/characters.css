@@ -33,20 +33,28 @@ body {
     position: fixed;
     top: 20px;
     left: 20px;
+    right: 20px;
     z-index: 1000;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px; 
+    gap: 15px;
+}
+
+.controls-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 #homeButton, #languageButton {
     font-family: 'Montserrat', sans-serif;
     border: none;
     cursor: pointer;
-    font-size: 1.2vw;
+    font-size: 14px;
     color: white;
     background: rgba(255, 255, 255, 0.1);
-    padding: 0.6vw 1.3vw;
+    padding: 10px 20px;
     border-radius: 20px;
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
@@ -54,7 +62,7 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
-    white-space: nowrap; 
+    white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -435,4 +443,296 @@ body {
     transform: skewX(-15deg);
     box-shadow: 0 0 10px rgba(255, 194, 194, 0.5);
     border-radius: 2px;
+}
+
+/* Стили для фильтра фракций */
+.faction-filter-container {
+    position: relative;
+    margin-left: 10px;
+}
+
+.faction-filter-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    height: 40px;
+}
+
+.faction-filter-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.faction-button-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+}
+
+.filter-arrow {
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+}
+
+.faction-filter-button.active .filter-arrow {
+    transform: rotate(180deg);
+}
+
+.faction-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: rgba(42, 22, 30, 0.95);
+    border-radius: 10px;
+    padding: 8px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.faction-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.faction-option:hover {
+    background: rgba(255, 194, 194, 0.1);
+}
+
+.faction-option-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+/* Стили для поиска */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+}
+
+.search-input {
+    padding: 10px 15px 10px 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    width: 200px;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    width: 250px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    pointer-events: none;
+    width: 22px; 
+    height: 22px; 
+    object-fit: contain;
+}
+
+
+/* Стили для кнопки бургер-меню */
+#burger-menu-button {
+    display: none; /* Скрыта по умолчанию */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 2010; /* Выше чем оверлей */
+    -webkit-tap-highlight-color: transparent;
+}
+
+#burger-menu-button span {
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Анимация крестика для кнопки "закрыть" */
+#burger-menu-button[aria-expanded="true"] span:nth-of-type(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+#burger-menu-button[aria-expanded="true"] span:nth-of-type(2) {
+    opacity: 0;
+}
+
+#burger-menu-button[aria-expanded="true"] span:nth-of-type(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+}
+
+
+/* Панель меню */
+#mobile-menu-panel {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Начальное положение за экраном */
+    width: 280px;
+    height: 100%;
+    background: #1a0f13;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 2005;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 80px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    visibility: hidden; /* Скрываем, когда не активна */
+}
+
+#mobile-menu-panel.active {
+    right: 0; /* Показываем панель */
+    visibility: visible;
+}
+
+#close-menu-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Оверлей для затемнения фона */
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s, visibility 0s 0.4s;
+}
+
+#menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s;
+}
+
+/* Контейнер для динамических контролов в шапке */
+#dynamic-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#mobile-menu-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 80px 20px 20px;
+}
+
+#mobile-menu-panel .search-container {
+    width: 100%;
+    margin: 0;
+}
+
+#mobile-menu-panel .search-input {
+    width: 100%;
+    padding-left: 40px;
+}
+
+#mobile-menu-panel .search-icon {
+    left: 12px;
+}
+
+#mobile-menu-panel .faction-filter-container {
+    width: 100%;
+    margin: 0;
+}
+
+#mobile-menu-panel .faction-filter-button {
+    width: 100%;
+    justify-content: space-between;
+}
+
+#mobile-menu-panel .faction-dropdown {
+    width: 100%;
+    max-height: 300px;
+    position: relative;
+    box-shadow: none;
+    position: relative;
+    top: auto;
+    left: auto;
+    max-height: 50vh;
+    overflow-y: auto;
+    background: rgba(26, 14, 19, 0.95);
+    border: 1px solid rgba(255, 194, 194, 0.1);
+    margin-top: 5px;
+    display: none;
+}
+
+#mobile-menu-panel .faction-option {
+    padding: 12px 16px;
+    color: #eee;
+    border-bottom: 1px solid rgba(255, 194, 194, 0.05);
+}
+
+#mobile-menu-panel .faction-dropdown.show {
+    display: flex;
+}
+
+/* Анимации для мобильного меню */
+#mobile-menu-panel {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    background: linear-gradient(145deg, rgba(42, 22, 30, 0.98) 0%, rgba(28, 15, 20, 0.98) 100%);
+    backdrop-filter: blur(10px);
+    border-left: 1px solid rgba(255, 194, 194, 0.2);
+}
+
+#mobile-menu-panel.active {
+    transform: translateX(0);
+}
+
+#menu-overlay {
+    transition: opacity 0.3s ease;
 }

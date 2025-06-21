@@ -6,6 +6,11 @@
     --bg-gradient-end: #081d18;
 }
 
+::selection {
+    background-color: #4e182e;
+    color: #ffffff;
+}
+
 * {
     margin: 0;
     padding: 0;

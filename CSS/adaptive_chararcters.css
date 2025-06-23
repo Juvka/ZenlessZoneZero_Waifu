@@ -108,6 +108,12 @@ body {
     padding: 20px;
 }
 
+.modal-faction-info {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 12px;
+}
+
 .modal-title {
     font-size: 2rem; /* Уменьшаем заголовок */
 }
@@ -354,6 +360,44 @@ body {
     .controls-left {
         flex-grow: 1;
     }
+
+    .faction-dropdown {
+        position: absolute;
+        top: 100;
+        left: 0;
+        width: 240px;
+        max-height: 500px;
+        overflow-y: auto;
+        background: rgba(42, 22, 30, 0.95);
+        border-radius: 10px;
+        padding: 8px 0px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        display: none;
+        flex-direction: column;
+        z-index: 1000;  
+        scrollbar-width: thin;
+        scrollbar-color: var(--bg-gradient-mid1) black;
+    }
+
+    .faction-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 1px 2px;
+        cursor: pointer;
+        transition: background 0.2s;
+        min-height: 45px;
+        font-size: 14px;
+    }
+
+    #mobile-menu-panel .faction-option {
+        padding: 0px 15px;
+    }
+
+    .faction-option span {
+    line-height: 1.25;
+}
+    
 }
 
 /* Горизонтальная ориентация на мобильных */

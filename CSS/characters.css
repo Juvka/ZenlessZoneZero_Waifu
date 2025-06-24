@@ -300,6 +300,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
 }
 
 .close-button:hover {
@@ -468,6 +475,13 @@ body {
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
     height: 40px;
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
 }
 
 .faction-filter-button:hover {
@@ -643,6 +657,13 @@ body {
     background: none;
     border: none;
     cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
 }
 
 /* Оверлей для затемнения фона */
@@ -730,7 +751,6 @@ body {
     display: flex;
 }
 
-/* Анимации для мобильного меню */
 #mobile-menu-panel {
     transform: translateX(100%);
     transition: transform 0.3s ease-out;
@@ -745,4 +765,41 @@ body {
 
 #menu-overlay {
     transition: opacity 0.3s ease;
+}
+
+.mobile-menu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 40px); 
+    margin-top: auto; 
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 194, 194, 0.1);
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+}
+
+.telegram-logo {
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+}
+
+.telegram-logo:hover {
+    opacity: 1;
+}
+
+.credits {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
 }

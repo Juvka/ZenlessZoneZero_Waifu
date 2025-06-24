@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'allCharactersButton': 'Все персонажи',
             'factions': {
                 '«Группа особого реагирования угрозыска»': '«Threat Investigation Special Response Team»',
-                '«Хитрые зайцы»': '«Gentle House»',
+                '«Хитрые зайцы»': '«Cunning Hares»',
                 '«Сыны Калидона»': '«Sons of Calydon»',
                 '«Секция 6»': '«Section 6»',
                 '«Белобог»': '«Belobog»',
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'factions': {
                 // Здесь ключи - это русские названия, а значения - их английские переводы
                 '«Группа особого реагирования угрозыска»': '«Threat Investigation Special Response Team»',
-                '«Хитрые зайцы»': '«Gentle House»',
+                '«Хитрые зайцы»': '«Cunning Hares»',
                 '«Сыны Калидона»': '«Sons of Calydon»',
                 '«Секция 6»': '«Section 6»',
                 '«Белобог»': '«Belobog»',
@@ -39,11 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    let currentLanguage = 'ru';
+    let currentLanguage = localStorage.getItem('language') || 'ru';
     const languageButton = document.getElementById('languageButton');
 
-    function translatePage() {
-        currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+    function applyTranslation() {
         languageButton.textContent = currentLanguage === 'ru' ? 'EN' : 'RU';
 
         const initialButton = document.querySelector('body > #newCharacterButton');
@@ -79,6 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    function translatePage() {
+        currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+        localStorage.setItem('language', currentLanguage);
+        applyTranslation();
+    }
+
+    // Применяем перевод при загрузке страницы, если язык уже выбран
+    applyTranslation();
 
     languageButton.addEventListener('click', translatePage);
 

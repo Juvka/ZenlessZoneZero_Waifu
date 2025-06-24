@@ -303,3 +303,14 @@
         text-align: right;
     }
 }
+
+@media (max-width: 768px) {
+  #newCharacterButton,
+  .container #newCharacterButton {
+    text-decoration: none !important;
+  }
+  #newCharacterButton::after,
+  .container #newCharacterButton::after {
+    display: none !important;
+  }
+}

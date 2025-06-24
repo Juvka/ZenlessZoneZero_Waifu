@@ -391,17 +391,20 @@ body {
     }
 
     #mobile-menu-panel .faction-dropdown {
-        position: relative;
-        top: auto;
-        left: auto;
-        width: 100%;
+        transition: opacity 0.65s cubic-bezier(.4,0,.2,1), transform 0.65s cubic-bezier(.4,0,.2,1);
+        opacity: 0;
+        transform: translateY(10px) scaleY(0.98);
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
         box-shadow: none;
         border: 1px solid rgba(255, 194, 194, 0.1);
     }
 
     #mobile-menu-panel .faction-dropdown.show {
-        display: flex;
-        flex-direction: column;
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+        pointer-events: auto;
     }
 
     #mobile-menu-panel .faction-option {
@@ -439,11 +442,31 @@ body {
     }
     
     .telegram-logo {
-        width: 22px;
-        height: 22px;
+        width: 18px;
+        height: 18px;
     }
     
     .credits {
         font-size: 0.8rem;
     }
+}
+
+@media (min-width: 769px) {
+  .faction-dropdown {
+    transition: opacity 0.65s cubic-bezier(.4,0,.2,1), transform 0.65s cubic-bezier(.4,0,.2,1);
+    opacity: 0;
+    transform: translateY(10px) scaleY(0.98);
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .faction-dropdown.show {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    pointer-events: auto;
+  }
+}
+
+.faction-dropdown.hiding {
+  pointer-events: none;
 }

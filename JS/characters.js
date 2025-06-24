@@ -165,11 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropdown = document.createElement('div');
         dropdown.className = 'faction-dropdown';
         
-        // Функция для обновления вариантов фракций
         function updateFactionOptions() {
-            dropdown.innerHTML = ''; // Очищаем текущие варианты
+            dropdown.innerHTML = '';
             
-            // Добавление вариантов фракций с актуальным переводом
             Object.entries(factions).forEach(([id, data]) => {
                 const option = document.createElement('div');
                 option.className = 'faction-option';
@@ -187,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.addEventListener('click', () => {
                     currentFactionFilter = id;
                     updateFactionButton(filterButton, id, data);
-                    dropdown.style.display = 'none';
+                    toggleDropdown();
                     renderCharacterCards();
                 });
                 
@@ -195,51 +193,73 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        // Инициализация вариантов
-        updateFactionOptions();
+        function toggleDropdown() {
+            const isShowing = dropdown.classList.contains('show');
+            
+            if (isShowing) {
+                dropdown.classList.remove('show');
+                dropdown.classList.add('hide');
+                
+                dropdown.addEventListener('animationend', () => {
+                    dropdown.classList.remove('hide');
+                }, { once: true });
+            } else {
+                // Сначала убираем предыдущие классы анимации
+                dropdown.classList.remove('hide');
+                
+                // Затем добавляем класс для показа
+                dropdown.classList.add('show');
+                
+                // Обновляем варианты при каждом открытии
+                updateFactionOptions();
+            }
+        }
         
         filterButton.addEventListener('click', (e) => {
             e.stopPropagation();
-            dropdown.style.display = dropdown.style.display === 'none' ? 'flex' : 'none';
+            toggleDropdown();
+        });
+        
+        // Закрытие при клике вне элемента
+        document.addEventListener('click', (e) => {
+            if (!filterContainer.contains(e.target)) {
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                    dropdown.classList.add('hide');
+                    
+                    dropdown.addEventListener('animationend', () => {
+                        dropdown.classList.remove('hide');
+                    }, { once: true });
+                }
+            }
         });
         
         filterContainer.appendChild(filterButton);
         filterContainer.appendChild(dropdown);
         
-        // Закрытие при клике вне элемента
-        document.addEventListener('click', (e) => {
-            if (!filterContainer.contains(e.target)) {
-                dropdown.style.display = 'none';
-            }
-        });
-        
-        // Обновляем варианты при смене языка
-        languageButton.addEventListener('click', () => {
-            updateFactionOptions();
-        });
-        
         return filterContainer;
     }
 
     // Обновление кнопки фильтра
-    function updateFactionButton(button, factionId, factionData) {
-        if (factionId === 'all') {
-            button.innerHTML = `
-                <span class="faction-filter-text">${translations[currentLanguage].selectFaction}</span>
-                <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
-                    <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            `;
-        } else {
-            button.innerHTML = `
-                ${factionData.image ? `<img src="${factionData.image}" alt="${factionData.name[currentLanguage]}" class="faction-button-icon">` : ''}
-                <span class="faction-filter-text">${factionData.name[currentLanguage]}</span>
-                <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
-                    <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            `;
-        }
+function updateFactionButton(button, factionId, factionData) {
+    if (factionId === 'all') {
+        button.innerHTML = `
+            <span class="faction-filter-text">${translations[currentLanguage].selectFaction}</span>
+            <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        `;
+    } else {
+        const faction = factions[factionId];
+        button.innerHTML = `
+            ${faction.image ? `<img src="${faction.image}" alt="${faction.name[currentLanguage]}" class="faction-button-icon">` : ''}
+            <span class="faction-filter-text">${faction.name[currentLanguage]}</span>
+            <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        `;
     }
+}
 
     // Создание поля поиска
     function createSearchField() {
@@ -270,21 +290,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Фильтрация персонажей
     function filterCharacters() {
-        return Object.entries(characters).filter(([id, data]) => {
-            // Проверка фракции
-            const factionMatch = 
-                currentFactionFilter === 'all' || 
-                (currentFactionFilter === 'none' && !data.faction) ||
-                (data.faction && currentFactionFilter === data.faction.image.split('/').pop().split('.')[0]);
-            
-            // Проверка поиска
-            const searchMatch = 
-                currentSearchQuery === '' || 
-                translations[currentLanguage].characters[id].name.toLowerCase().includes(currentSearchQuery);
-            
-            return factionMatch && searchMatch;
-        });
-    }
+    return Object.entries(characters).filter(([id, data]) => {
+        // Получаем ключ фракции из объекта characters
+        let factionKey = null;
+        if (data.faction) {
+            // Извлекаем имя файла без расширения
+            const factionImage = data.faction.image.split('/').pop().split('.')[0];
+            // Находим соответствующую фракцию в factions
+            factionKey = Object.keys(factions).find(key => 
+                factions[key].image && factions[key].image.includes(factionImage)
+            );
+        }
+
+        // Проверка фракции
+        const factionMatch = 
+            currentFactionFilter === 'all' || 
+            (currentFactionFilter === 'none' && !data.faction) ||
+            (factionKey && currentFactionFilter === factionKey);
+        
+        // Проверка поиска
+        const searchMatch = 
+            currentSearchQuery === '' || 
+            translations[currentLanguage].characters[id].name.toLowerCase().includes(currentSearchQuery);
+        
+        return factionMatch && searchMatch;
+    });
+}
 
     // Отрисовка карточек персонажей
     function renderCharacterCards() {
@@ -379,11 +410,46 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
+        // Обновление выпадающего списка фракций
+        updateFactionDropdown();
+        
         // Обновление модального окна, если открыто
         if (modal.classList.contains('active') && currentCharacterContext.id) {
             translateModal(currentCharacterContext.id);
         }
     }
+
+    function updateFactionDropdown() {
+    const dropdown = document.querySelector('.faction-dropdown');
+    if (!dropdown) return;
+    
+    dropdown.innerHTML = ''; // Очищаем текущие варианты
+    
+    // Добавление вариантов фракций с актуальным переводом
+    Object.entries(factions).forEach(([id, data]) => {
+        const option = document.createElement('div');
+        option.className = 'faction-option';
+        option.dataset.factionId = id;
+        
+        if (id !== 'all' && id !== 'none' && data.image) {
+            option.innerHTML = `
+                <img src="${data.image}" alt="${data.name[currentLanguage]}" class="faction-option-icon">
+                <span>${data.name[currentLanguage]}</span>
+            `;
+        } else {
+            option.innerHTML = `<span>${data.name[currentLanguage]}</span>`;
+        }
+        
+        option.addEventListener('click', () => {
+            currentFactionFilter = id;
+            updateFactionButton(document.querySelector('.faction-filter-button'), id, data);
+            dropdown.style.display = 'none';
+            renderCharacterCards();
+        });
+        
+        dropdown.appendChild(option);
+    });
+}
 
     // Перевод модального окна
     function translateModal(characterId) {
@@ -488,12 +554,12 @@ function setupMobileMenu() {
     // Создаем и добавляем поиск в меню
     const mobileSearch = createSearchField();
     mobileSearch.classList.add('mobile-search');
-    menuPanel.appendChild(mobileSearch);
+    menuPanel.insertBefore(mobileSearch, menuPanel.querySelector('.mobile-menu-footer'));
     
     // Создаем и добавляем фильтр фракций в меню
     const mobileFactionFilter = createFactionFilter();
     mobileFactionFilter.classList.add('mobile-faction-filter');
-    menuPanel.appendChild(mobileFactionFilter);
+    menuPanel.insertBefore(mobileFactionFilter, menuPanel.querySelector('.mobile-menu-footer'));
     
     // Настройка обработчиков для бургер-меню
     const burgerButton = document.getElementById('burger-menu-button');
@@ -503,23 +569,34 @@ function setupMobileMenu() {
     burgerButton.addEventListener('click', () => {
         const isExpanded = burgerButton.getAttribute('aria-expanded') === 'true';
         burgerButton.setAttribute('aria-expanded', !isExpanded);
-        document.getElementById('mobile-menu-panel').classList.toggle('active');
-        menuOverlay.classList.toggle('active');
-        document.body.style.overflow = isExpanded ? '' : 'hidden';
+        
+        if (!isExpanded) {
+            menuPanel.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        } else {
+            closeMenu();
+        }
     });
     
-    closeButton.addEventListener('click', () => {
-        burgerButton.setAttribute('aria-expanded', 'false');
-        document.getElementById('mobile-menu-panel').classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    });
+    closeButton.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
     
-    menuOverlay.addEventListener('click', () => {
+    function closeMenu() {
         burgerButton.setAttribute('aria-expanded', 'false');
-        document.getElementById('mobile-menu-panel').classList.remove('active');
+        menuPanel.classList.remove('active');
+        menuPanel.classList.add('closing');
         menuOverlay.classList.remove('active');
+        menuOverlay.classList.add('closing');
         document.body.style.overflow = '';
-    });
-}
-});
+        
+        // Удаляем классы после завершения анимации
+        menuPanel.addEventListener('animationend', () => {
+            menuPanel.classList.remove('closing');
+        }, { once: true });
+        
+        menuOverlay.addEventListener('animationend', () => {
+            menuOverlay.classList.remove('closing');
+        }, { once: true });
+    }
+}})

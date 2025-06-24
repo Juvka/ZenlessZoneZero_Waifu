@@ -16,7 +16,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     border: none;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: white;
     background: rgba(255, 255, 255, 0.1);
     padding: 23px 18px;
@@ -390,8 +390,28 @@ body {
         font-size: 14px;
     }
 
+    #mobile-menu-panel .faction-dropdown {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid rgba(255, 194, 194, 0.1);
+    }
+
+    #mobile-menu-panel .faction-dropdown.show {
+        display: flex;
+        flex-direction: column;
+    }
+
     #mobile-menu-panel .faction-option {
-        padding: 0px 15px;
+        padding: 12px 15px;
+        font-size: 14px;
+        border-bottom: 1px solid rgba(255, 194, 194, 0.05);
+    }
+
+    #mobile-menu-panel .faction-option:last-child {
+        border-bottom: none;
     }
 
     .faction-option span {

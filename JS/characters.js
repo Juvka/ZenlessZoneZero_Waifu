@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
             option.dataset.factionId = id;
             if (id !== 'all' && id !== 'none' && data.image) {
                 option.innerHTML = `
-                    <img src="${data.image}" alt="${data.name[currentLanguage]}" class="faction-option-icon">
+                    <img src="${data.image}" alt="${data.name[currentLanguage]}" class="faction-option-icon" loading="lazy">
                     <span>${data.name[currentLanguage]}</span>
                 `;
             } else {
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const faction = factions[factionId];
             button.innerHTML = `
-                ${faction.image ? `<img src="${faction.image}" alt="${faction.name[currentLanguage]}" class="faction-button-icon">` : ''}
+                ${faction.image ? `<img src="${faction.image}" alt="${faction.name[currentLanguage]}" class="faction-button-icon" loading="lazy">` : ''}
                 <span class="faction-filter-text">${faction.name[currentLanguage]}</span>
                 <svg class="filter-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
                     <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -275,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchIcon.className = 'search-icon';
         searchIcon.src = 'images/Agents.webp'; // Укажите путь к вашему изображению
         searchIcon.alt = 'Search'; // Добавляем alt для доступности
+        searchIcon.loading = 'lazy';
         
         const searchInput = document.createElement('input');
         searchInput.type = 'text';
@@ -343,6 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.src = data.image.trim();
         img.className = 'char-image';
+        img.loading = 'lazy';
         card.appendChild(img);
         
         const name = document.createElement('h3');
@@ -354,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.faction) {
             const factionImg = document.createElement('img');
             factionImg.src = data.faction.image.trim();
+            factionImg.loading = 'lazy';
             factionInfo.appendChild(factionImg);
             const factionName = document.createElement('span');
             factionInfo.appendChild(factionName);

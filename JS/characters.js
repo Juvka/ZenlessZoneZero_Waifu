@@ -332,6 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(card);
         });
         
+        setupMobileCardAnimations();
         translatePage();
     }
 
@@ -517,6 +518,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal();
             }
         });
+    }
+
+    function setupMobileCardAnimations() {
+        if (window.innerWidth > 768) return; // Только для мобильных
+        const cards = document.querySelectorAll('.character-card');
+        cards.forEach(card => card.classList.remove('visible'));
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+        cards.forEach(card => observer.observe(card));
     }
 
     init();

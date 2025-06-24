@@ -136,12 +136,14 @@ document.addEventListener('DOMContentLoaded', () => {
         cardFront.className = 'character-card-front';
         const imgElementFront = document.createElement('img');
         imgElementFront.alt = 'Character Image Front';
+        imgElementFront.loading = 'lazy';
         cardFront.appendChild(imgElementFront);
 
         const cardBack = document = document.createElement('div');
         cardBack.className = 'character-card-back';
         const imgElementBack = document.createElement('img');
         imgElementBack.alt = 'Character Image Back';
+        imgElementBack.loading = 'lazy';
         cardBack.appendChild(imgElementBack);
 
         cardInner.appendChild(cardFront);
@@ -216,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 factionImage.id = 'faction-image';
                 factionImage.src = characterData.faction.image;
                 factionImage.alt = 'Faction Image';
+                factionImage.loading = 'lazy';
 
                 const factionName = document.createElement('span');
                 factionName.id = 'faction-name';

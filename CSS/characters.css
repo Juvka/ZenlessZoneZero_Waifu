@@ -851,3 +851,26 @@ body {
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .character-card {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: none;
+  }
+  .character-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: card-slide-up-mobile 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+  @keyframes card-slide-up-mobile {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

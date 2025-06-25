@@ -232,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
             option.addEventListener('click', () => {
                 currentFactionFilter = id;
                 updateFactionButton(option.closest('.faction-filter-container').querySelector('.faction-filter-button'), id, data);
+                renderCharacterCards();
                 dropdown.classList.add('hiding');
                 requestAnimationFrame(() => {
                     dropdown.classList.remove('show');

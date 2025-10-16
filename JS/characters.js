@@ -282,14 +282,57 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.type = 'text';
         searchInput.className = 'search-input';
         searchInput.placeholder = translations[currentLanguage].searchPlaceholder;
+
+        // Элемент для показа ошибки под полем
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'search-error';
+        errorMessage.textContent = 'В этом поле запрещено писать цифры!';
+        errorMessage.style.display = 'none';
         
         searchInput.addEventListener('input', (e) => {
+            // Удаляем любые цифры 1–9, разрешая 0
+            const sanitized = e.target.value.replace(/[1-9]/g, '');
+            if (sanitized !== e.target.value) {
+                e.target.value = sanitized;
+                showError();
+            }
             currentSearchQuery = e.target.value.toLowerCase();
             renderCharacterCards();
         });
+
+        // Блокируем ввод 1–9 с клавиатуры (включая Numpad)
+        searchInput.addEventListener('keydown', (e) => {
+            const blockedKeys = ['1','2','3','4','5','6','7','8','9'];
+            const blockedNumpad = ['Numpad1','Numpad2','Numpad3','Numpad4','Numpad5','Numpad6','Numpad7','Numpad8','Numpad9'];
+            if (blockedKeys.includes(e.key) || blockedNumpad.includes(e.code)) {
+                e.preventDefault();
+                showError();
+            }
+        });
+
+        // Блокируем вставку цифр 1–9
+        searchInput.addEventListener('paste', (e) => {
+            const text = (e.clipboardData || window.clipboardData).getData('text');
+            if (/[1-9]/.test(text)) {
+                e.preventDefault();
+                document.execCommand('insertText', false, text.replace(/[1-9]/g, ''));
+                showError();
+            }
+        });
+
+        function showError() {
+            errorMessage.style.display = 'block';
+            errorMessage.setAttribute('aria-live', 'polite');
+            // Скрыть сообщение через короткое время, чтобы не мешало
+            clearTimeout(showError._t);
+            showError._t = setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 1800);
+        }
         
         searchContainer.appendChild(searchIcon);
         searchContainer.appendChild(searchInput);
+        searchContainer.appendChild(errorMessage);
         
         return searchContainer;
     }

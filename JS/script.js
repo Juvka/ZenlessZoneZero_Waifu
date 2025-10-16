@@ -111,6 +111,62 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fufu
     };
 
+    // Единая ссылка для перехода при клике на любую карточку видео
+    const TELEGRAM_CHANNEL_URL = 'https://t.me/+hSIHiYHmWyQyOTMy';
+
+    // Индивидуальные ссылки на видео для каждого персонажа.
+    // Заполните значения ссылками (Telegram/YouTube и т.п.).
+    // Оставьте пустым или undefined, чтобы использовать автоматический поиск на YouTube.
+    const characterVideos = {
+        // Указывайте короткие превью-видео (mp4/webm, 3-8 секунд, без звука) — для легкой загрузки
+        // previewX - превью для карточки, urlX - ссылка при клике
+        'Jane Doe': { gameplay: '', build: '', story: '', previewGameplay: '', previewBuild: '', previewStory: '' },
+        'Nicole Demara': { gameplay: '', build: '', story: '' },
+        'Burnice White': { gameplay: '', build: '', story: '' },
+        'Caesar King': { gameplay: '', build: '', story: '' },
+        'Zhu Yuan': { gameplay: '', build: '', story: '', previewGameplay: 'videos/zhuHati.webm', previewBuild: 'videos/zhuMan.webm', previewStory: ''},
+        'Hoshimi Miyabi': { gameplay: '', build: '', story: '' },
+        'Tsukishiro Yanagi': { gameplay: '', build: '', story: '' },
+        'Grace Howard': { gameplay: '', build: '', story: '' },
+        'Ellen Joe': { gameplay: '', build: '', story: '' },
+        'Evelyn Chevalier': { gameplay: '', build: '', story: '' },
+        'Astra Yao': { gameplay: '', build: '', story: '' },
+        'Belle': { gameplay: '', build: '', story: '' },
+        'Soldier 0 Anby': { gameplay: '', build: '', story: '' },
+        'Pulchra Fellini': { gameplay: '', build: '', story: '' },
+        'Trigger': { gameplay: '', build: '', story: '' },
+        'Vivian Banshee': { gameplay: '', build: '', story: '' },
+        'Yixuan': { gameplay: '', build: '', story: '' },
+    };
+
+    // Количество карточек в слайдере для каждого персонажа и заглушки
+    const characterVideoCounts = {
+        'Zhu Yuan': 15,
+        'Jane Doe': 7,
+        'Nicole Demara': 7,
+        'Caesar King': 4,
+        'Hoshimi Miyabi': 5,
+        'Tsukishiro Yanagi': 4,
+        'Grace Howard': 0, // заглушка
+        'Ellen Joe': 6,
+        'Evelyn Chevalier': 4,
+        'Astra Yao': 3,
+        'Belle': 7,
+        'Soldier 0 Anby': 0, // заглушка
+        'Pulchra Fellini': 2,
+        'Trigger': 4,
+        'Vivian Banshee': 0, // заглушка
+        'Yixuan': 2,
+    };
+
+    // Тексты на карточках видео (дефолтные и переопределения по персонажу)
+    const videoLabelsDefault = { gameplay: 'Геймплей', build: 'Сборка / билд', story: 'История / лор' };
+    const characterVideoTexts = {
+        // Пример переопределения:
+        // 'Grace Howard': { gameplay: 'Комбо', build: 'Артефакты', story: 'Сюжет' },
+        'Zhu Yuan': { gameplay: 'С псом эфириалов', build: 'С подростком', story: 'С рейдерами каверн' },
+    };
+
     const arr = Object.keys(characters);
     const newCharacterButton = document.getElementById('newCharacterButton'); // Изначальная кнопка
     let lastCharacter = null; // Переменная для хранения последнего выбранного персонажа
@@ -169,6 +225,14 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(characterWrapper);
 
         document.body.appendChild(container);
+
+        // Создаем (если нет) секцию для видео под основным контентом
+        let videosSection = document.getElementById('videos-section');
+        if (!videosSection) {
+            videosSection = document.createElement('section');
+            videosSection.id = 'videos-section';
+            document.body.appendChild(videosSection);
+        }
 
         cardInner.addEventListener('click', () => {
             cardInner.classList.toggle('is-flipped');
@@ -252,6 +316,131 @@ document.addEventListener('DOMContentLoaded', () => {
         if (containerElement) {
             containerElement.classList.add('animate-in');
         }
+
+        // Рендерим секцию видео, соответствующую выбранному персонажу
+        renderVideosSection(randomItem);
+    }
+
+    // Рендер секции видео под контентом
+    function renderVideosSection(characterDisplayName) {
+        const section = document.getElementById('videos-section');
+        if (!section) return;
+
+        // Заголовок и сетка
+        section.innerHTML = '';
+        const title = document.createElement('h2');
+        title.className = 'videos-title';
+        title.textContent = `Горячие фуллы с ${characterDisplayName}`;
+
+        let count = characterVideoCounts[characterDisplayName];
+        // По умолчанию 3, но не больше 3 и сохраняя нули как пустые состояния
+        count = count == null ? 3 : Math.min(3, count);
+
+        // Заглушка для отсутствующих видео
+        if (count === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'videos-empty';
+            empty.textContent = 'Видео пока не появилось :(';
+            section.appendChild(title);
+            section.appendChild(empty);
+            document.body.appendChild(section);
+            return;
+        }
+
+        const grid = document.createElement('div');
+        grid.className = 'videos-grid';
+
+        // Темы карточек (подписи могут переопределяться для персонажа)
+        const topics = [
+            { key: 'gameplay', label: characterVideoTexts[characterDisplayName]?.gameplay || videoLabelsDefault.gameplay },
+            { key: 'build', label: characterVideoTexts[characterDisplayName]?.build || videoLabelsDefault.build },
+            { key: 'story', label: characterVideoTexts[characterDisplayName]?.story || videoLabelsDefault.story },
+        ];
+
+        const makeCard = (topic) => {
+            const query = encodeURIComponent(`${characterDisplayName} Zenless Zone Zero ${topic.key}`);
+            const fallbackUrl = `https://www.youtube.com/results?search_query=${query}`;
+            const specific = (characterVideos[characterDisplayName] || {})[topic.key];
+            const url = TELEGRAM_CHANNEL_URL; // всегда ведём на Телеграм-канал
+
+            const card = document.createElement('a');
+            card.className = 'video-card';
+            card.href = url;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+
+            // Лёгкое фоновое превью-видео, если задано
+            const previews = characterVideos[characterDisplayName] || {};
+            const previewMap = {
+                gameplay: previews.previewGameplay,
+                build: previews.previewBuild,
+                story: previews.previewStory,
+            };
+            const previewSrc = previewMap[topic.key];
+            if (previewSrc) {
+                const vid = document.createElement('video');
+                vid.className = 'video-bg';
+                vid.muted = true;
+                vid.loop = true;
+                vid.playsInline = true;
+                vid.preload = 'none'; // экономим трафик
+                vid.setAttribute('data-src', previewSrc); // отложенная загрузка
+                card.appendChild(vid);
+            }
+
+            const overlay = document.createElement('div');
+            overlay.className = 'video-card-overlay';
+
+            const label = document.createElement('div');
+            label.className = 'video-card-label';
+            label.textContent = topic.label;
+
+            // Fallback-превью: используем картинку персонажа, если видео не задано
+            if (!previewSrc) {
+                card.style.backgroundImage = `url(${characters[characterDisplayName].image})`;
+                card.style.backgroundSize = 'cover';
+                card.style.backgroundPosition = 'center';
+            }
+
+            overlay.appendChild(label);
+            card.appendChild(overlay);
+            return card;
+        };
+
+        // Заполняем карточки циклически по темам до нужного количества
+        for (let i = 0; i < count; i++) {
+            const topic = topics[i % topics.length];
+            grid.appendChild(makeCard(topic));
+        }
+
+        section.appendChild(title);
+        section.appendChild(grid);
+
+        // Убрана логика слайдера: без автопрокрутки, прогресс-бара и drag-to-scroll
+
+        // Гарантируем, что секция расположена внизу всего контента
+        // (перемещает элемент в конец body, не дублируя его)
+        document.body.appendChild(section);
+
+        // Автовоспроизведение превью при появлении в видимой области
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    if (video.dataset.src && !video.src) {
+                        video.src = video.dataset.src;
+                    }
+                    const playPromise = video.play();
+                    if (playPromise && typeof playPromise.then === 'function') {
+                        playPromise.catch(() => {});
+                    }
+                } else {
+                    video.pause();
+                }
+            });
+        }, { rootMargin: '100px' });
+
+        document.querySelectorAll('#videos-section .video-bg').forEach(v => observer.observe(v));
     }
 
     // Обработчик для первой кнопки "Выбрать агента"

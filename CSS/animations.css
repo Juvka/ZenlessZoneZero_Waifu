@@ -157,3 +157,51 @@
         transform: translateY(-10px);
     }
 }
+
+/* Idle float for character image to subtly draw attention */
+@keyframes charIdleFloat {
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-6px) scale(1.015) rotate(-0.4deg);
+    }
+    100% {
+        transform: translateY(-3px) scale(1.02) rotate(0.4deg);
+    }
+}
+
+/* Soft glowing pulse around the circular avatar border */
+@keyframes charGlowPulse {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 194, 194, 0.35),
+                    0 0 0 0 rgba(255, 194, 194, 0.18) inset;
+        filter: saturate(1.02) contrast(1.02);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 194, 194, 0.6),
+                    0 0 0 8px rgba(255, 194, 194, 0.08) inset;
+        filter: saturate(1.08) contrast(1.06);
+    }
+    100% {
+        box-shadow: 0 0 24px rgba(255, 194, 194, 0.45),
+                    0 0 0 0 rgba(255, 194, 194, 0.14) inset;
+        filter: saturate(1.04) contrast(1.04);
+    }
+}
+
+/* Quick enticing pop on hover */
+@keyframes charHoverPop {
+    0% {
+        transform: translateY(-2px) scale(1) rotate(0deg);
+    }
+    35% {
+        transform: translateY(-6px) scale(1.06) rotate(0.8deg);
+    }
+    70% {
+        transform: translateY(-4px) scale(1.03) rotate(-0.5deg);
+    }
+    100% {
+        transform: translateY(-5px) scale(1.045) rotate(0deg);
+    }
+}

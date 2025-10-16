@@ -53,6 +53,12 @@ body {
     -webkit-user-drag: none;
 }
 
+#character:hover .character-card-front img,
+#character:hover .character-card-back img {
+    transform: translateY(-0.6vw) scale(1.04);
+    animation: charHoverPop 480ms cubic-bezier(0.22, 1, 0.36, 1) forwards, charGlowPulse 2.2s ease-in-out infinite;
+}
+
 .character-card-inner {
     position: relative;
     width: 100%;
@@ -97,6 +103,11 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+                filter 0.45s ease,
+                box-shadow 0.45s ease;
+    animation: charIdleFloat 5s ease-in-out infinite alternate,
+               charGlowPulse 3.6s ease-in-out infinite;
 }
 
 

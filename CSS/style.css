@@ -5,6 +5,19 @@
     color: #ffffff;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4e182e;
+    border-radius: 10px;
+}   
+::-webkit-scrollbar-track {
+    background: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -16,6 +29,8 @@ body {
     background: linear-gradient(45deg, #171009, #2a161e, #0a1c22, #081d18);
     background-size: 400% 400%;
     font-size: 2vw; 
+    flex-wrap: wrap; /* Позволяем переносить секции на новую строку */
+    padding-top: 10vw; /* Отступ от шапки */
 }
 
 .container {
@@ -25,6 +40,184 @@ body {
     padding: 2vw;
     max-width: 90vw;
     flex-wrap: wrap;
+}
+
+/* Секция с рекомендованными видео под контентом */
+#videos-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 2.5vw auto 4vw;
+    padding: 0 2vw;
+    flex: 0 0 100%; /* Занимаем всю ширину, чтобы уйти на новую строку ниже основного контента */
+}
+.videos-slider-wrap {
+    position: relative;
+}
+
+.videos-nav {
+    pointer-events: none; /* клики проходят только по кнопкам */
+}
+
+.videos-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 194, 194, 0.35);
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: transform .2s ease, background .2s ease, opacity .2s ease;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.videos-btn:hover { background: rgba(0,0,0,0.55); transform: translateY(-50%) scale(1.06); }
+.videos-btn:active { transform: translateY(-50%) scale(0.97); }
+.videos-btn.prev { left: 0.2vw; }
+.videos-btn.next { right: 0.2vw; }
+
+@media (max-width: 768px) {
+  .videos-btn { width: 38px; height: 38px; }
+}
+
+.videos-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2.2vw;
+    color: #ffffff;
+    margin: 1vw 0 1.2vw;
+    text-shadow: 0 0 10px rgba(255, 194, 194, 0.2);
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(380px, 1fr));
+    gap: 1.2vw;
+}
+
+/* Горизонтальный слайдер для >4 карточек */
+.videos-slider {
+    display: grid;
+    grid-auto-flow: column;
+    /* фиксированная ширина карточек для гарантированного overflow */
+    grid-auto-columns: clamp(320px, 32vw, 420px);
+    gap: 1.2vw;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.6vw;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    cursor: grab;
+}
+
+.videos-slider::-webkit-scrollbar { display: none; } /* WebKit */
+
+.videos-slider .video-card {
+    scroll-snap-align: start;
+}
+
+.videos-slider.dragging {
+    cursor: grabbing;
+}
+
+.videos-progress {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.videos-progress-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255,194,194,0.4), rgba(255,194,194,0.8));
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 0.2s linear;
+}
+
+.videos-empty {
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(255,255,255,0.7);
+    padding: 1.2vw 0;
+}
+
+.video-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 0.8vw;
+    overflow: hidden;
+    border: 1px solid rgba(255, 194, 194, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease, border-color 0.35s ease, filter 0.55s ease;
+    filter: blur(7px) grayscale(1) saturate(0.85) brightness(0.85);
+}
+
+/* Фоновое видео внутри карточки */
+.video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.video-card:hover {
+    transform: translateY(-0.4vw) scale(1.02);
+    box-shadow: 0 12px 32px rgba(255, 194, 194, 0.25);
+    border-color: rgba(255, 194, 194, 0.35);
+    filter: blur(0px) grayscale(0) saturate(1) brightness(1);
+}
+
+.video-card:hover .video-card-overlay {
+    background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%);
+}
+
+.video-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1vw;
+    transition: background 0.45s ease;
+    z-index: 1;
+}
+
+.video-card-label {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1vw;
+    padding: 0.4vw 0.8vw;
+    border-radius: 0.6vw;
+    background: rgba(255, 194, 194, 0.25);
+    border: 1px solid rgba(255, 194, 194, 0.35);
+    backdrop-filter: blur(4px);
+}
+
+@media (max-width: 768px) {
+  .videos-title { font-size: 5vw; }
+  .videos-grid { grid-template-columns: 1fr; gap: 16px; }
+  .video-card { border-radius: 12px; }
+  .video-card-overlay { padding: 12px; }
+  .video-card-label { font-size: 3.8vw; border-radius: 10px; padding: 8px 12px; }
+  body { padding-top: 16vw; }
 }
 
 .container.animate-in {
